@@ -27,7 +27,7 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
         cache-dependency-path: "./frontend/package-lock.json"
-    - run: cd /home/usuario/E09/frontend && npm  install
-    - run: cd /home/usuario/E09/frontend && npm run tests
-    - run: cd /home/usuario/E09/frontend && npm test
+    - run: cd /frontend && npm  install
+    - run: cd /frontend && npm run tests
+    - run: cd /frontend && npm test
 
