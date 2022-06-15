@@ -1,5 +1,11 @@
 /* To learn more about this file see: https://angular.io/config/tsconfig. */
 {
+  "paths": {
+    "@home/*":["src/app/pages/home/*"],
+    "@auth/*":["src/app/pages/auth/*"],
+    "@shared/*":["src/app/shared/*"],
+    "@env/*":["src/app/pages/env/*"]
+  },
   "compileOnSave": false,
   "compilerOptions": {
     "baseUrl": "./",
