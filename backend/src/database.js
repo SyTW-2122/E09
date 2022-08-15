@@ -10,6 +10,7 @@ mongoose.connect(uri).then(()=>{
   console.error(err)
 })
   
+/*
   //Prueba de database
   moneda1 = new monedaModel({
     nombre: "pvu",
@@ -42,3 +43,4 @@ usuario= new userModel({
  
 console.log(moneda1.precio)
 mongoose.connection.close()
+*/

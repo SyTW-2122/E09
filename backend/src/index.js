@@ -1,4 +1,5 @@
 const app = require('./app');
+require('./database')
 
 //start the server
 app.listen(app.get('port'), () => {
@@ -9,5 +10,5 @@ app.get('/', (req, res) => {
     res.send("Hello World")
 })
 
-app.use(require('./routes/buy.routes'));
+app.use(require('./routes/Transaction.routes'));
 
