@@ -11,4 +11,5 @@ app.get('/', (req, res) => {
 })
 
 app.use(require('./routes/Transaction.routes'));
+app.use(require('./routes/login.routes'));
 
