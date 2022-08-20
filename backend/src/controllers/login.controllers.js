@@ -1,5 +1,5 @@
 const LoginCtrl = {}
-
+const express = require('express')
 const usuario = require('../models/usuario')
 const jwt = require('jsonwebtoken')
 LoginCtrl.register = (req, res) => {
@@ -35,7 +35,6 @@ LoginCtrl.login = (req, res) => {
                     res.status(500).send("Error al autenticar")
                 }
                 else if(result) {
-                    res.status(200).send("Has iniciado sesión correctamente")
                     const user={username:username}
                     const accesToken = generateAccesToken(user)
                     res.header('authorization', accesToken).json({
@@ -55,19 +54,18 @@ function generateAccesToken(user){
     return jwt.sign(user,"claveSecreta",{expiresIn:'3m'})
 
 }
-function validateToken(req, res, next){
+LoginCtrl.validateToken = function(req, res, next) {
     const accesToken = req.headers['authorization'];
-    if (!accesToken) {
-        jwt.verify(accesToken,'claveSecreta',(err,user) => {
-            if (err) {
-                res.send('acces denied');
-            }
-            else {
-                req.user=user;
-                next();
-            }
-        })
-    }
+    if (!accesToken) res.send("Acces denied")
+    jwt.verify(accesToken,'claveSecreta',(err,user) => {
+        if (err) {
+            res.send('acces denied');
+        }
+        else {
+            req.user=user;
+            next();
+        }
+    })
 }
 module.exports = LoginCtrl
 
