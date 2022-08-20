@@ -50,22 +50,26 @@ LoginCtrl.login = (req, res) => {
         }
     })
 }
-function generateAccesToken(user){
-    return jwt.sign(user,"claveSecreta",{expiresIn:'3m'})
 
+function generateAccesToken(user){
+    return jwt.sign(user,"claveSecreta",{expiresIn:'300m'})
 }
+
 LoginCtrl.validateToken = function(req, res, next) {
-    const accesToken = req.headers['authorization'];
-    if (!accesToken) res.send("Acces denied")
-    jwt.verify(accesToken,'claveSecreta',(err,user) => {
-        if (err) {
-            res.send('acces denied');
-        }
-        else {
-            req.user=user;
-            next();
-        }
-    })
+    const accesToken = req.headers['authorization'] || req.query.accessToken;
+    if (!accesToken) res.status(500).send("Acces denied")
+    else {
+        jwt.verify(accesToken, 'claveSecreta', (err, user) => {
+            if (err) {
+                res.send('acces denied');
+            }
+            else {
+                req.user = user;
+                next();
+            }
+        })
+    }
 }
+
 module.exports = LoginCtrl
 
