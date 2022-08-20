@@ -5,7 +5,7 @@ const bodyParser = require('body-parser')
 
 const app = express();
 
-app.set('port', 4000 || process.env.PORT )
+//app.set('port', 4000 || process.env.PORT )
 
 //use morgan to log requests to the console
 app.use(express.json());

@@ -1,9 +1,11 @@
 const app = require('./app');
 require('./database')
 
+const PORT = process.env.PORT || 4000 
+
 //start the server
-app.listen(app.get('port'), () => {
-    console.log(`Example app listening at http://localhost:${app.get('port')}`);
+app.listen(PORT, () => {
+    console.log(`Example app listening at http://localhost:${PORT}`);
 })
 
 app.get('/', (req, res) => {
