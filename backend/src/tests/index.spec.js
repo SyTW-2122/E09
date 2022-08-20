@@ -10,7 +10,9 @@ app.get('/', (req, res) => {
     res.send("Hello World")
 })
 
-app.use(require('../routes/buy.routes'));
+app.use(require('../routes/Transaction.routes'));
+app.use(require('../routes/login.routes'));
+
 ///////
 
 describe('App', () => {
