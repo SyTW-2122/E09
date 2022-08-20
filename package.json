@@ -1,0 +1,19 @@
+{
+    "name": "portfolio",
+    "version": "1.0.0",
+    "description": "",
+    "main": "backend/index.js",
+    "scripts": {
+      "start": "node backend/index.js"
+    },
+    "repository": {
+      "type": "git",
+      "url": "git+https://github.com/SyTW-2122/E09.git"
+    },
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+      "url": "https://github.com/SyTW-2122/E09/issues"
+    },
+    "homepage": "https://github.com/SyTW-2122/E09#readme"
+  }
