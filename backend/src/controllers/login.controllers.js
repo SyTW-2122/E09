@@ -1,7 +1,7 @@
 const LoginCtrl = {}
 
 const usuario = require('../models/usuario')
-
+const jwt = require('jsonwebtoken')
 LoginCtrl.register = (req, res) => {
     const username = req.body.username;
     const password = req.body.password;
@@ -36,6 +36,13 @@ LoginCtrl.login = (req, res) => {
                 }
                 else if(result) {
                     res.status(200).send("Has iniciado sesión correctamente")
+                    const user={username:username}
+                    const accesToken = generateAccesToken(user)
+                    res.header('authorization', accesToken).json({
+                        message: 'Usuario autenticado',
+                        token: accesToken
+                    })
+
                 }
                 else {
                     res.status(500).send("Usuario y/o contraseña incorrecta")
@@ -44,6 +51,23 @@ LoginCtrl.login = (req, res) => {
         }
     })
 }
+function generateAccesToken(user){
+    return jwt.sign(user,"claveSecreta",{expiresIn:'3m'})
 
-
+}
+function validateToken(req, res, next){
+    const accesToken = req.headers['authorization'];
+    if (!accesToken) {
+        jwt.verify(accesToken,'claveSecreta',(err,user) => {
+            if (err) {
+                res.send('acces denied');
+            }
+            else {
+                req.user=user;
+                next();
+            }
+        })
+    }
+}
 module.exports = LoginCtrl
+
