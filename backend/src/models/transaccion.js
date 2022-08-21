@@ -2,7 +2,8 @@ const monedaModel = require("./moneda")
 const mongoose = require("mongoose"); 
 
 const transaccionSchema = mongoose.Schema({
-  nombre: { type: String, required: true},
+  nombreUsuario: { type: String, required: true, unique: true},
+  nombreMoneda: { type: String, required: true},
   cantidad: { type: Number, required: true},
   precio: { type: Number, required: true},
   tipo: { type: String, required: true},
