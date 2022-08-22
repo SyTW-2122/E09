@@ -1,4 +1,5 @@
 const axios = require('axios');
+const { default: mongoose } = require('mongoose');
 require('../database')
 const monedaModel = require("../models/moneda")
 
@@ -20,8 +21,17 @@ new Promise(async (resolve, reject) => {
     // success
     const monedas = response.data["data"];
     for (let moneda in monedas){
-      nuevaMoneda = new monedaModel({ nombre: monedas[moneda]["symbol"], precio: monedas[moneda]["quote"]["USD"]["price"], supply: monedas[moneda]["circulating_supply"] })
-      await nuevaMoneda.save()
+      const monedaBD = await monedaModel.find({"nombre": monedas[moneda]["symbol"]})
+      if (monedaBD.length == 0) {
+        // Se crea una nueva moneda en la BD
+        nuevaMoneda = new monedaModel({ nombre: monedas[moneda]["symbol"], precio: monedas[moneda]["quote"]["USD"]["price"], supply: monedas[moneda]["circulating_supply"] })
+        await nuevaMoneda.save()
+      }
+      else {
+        // Se actualiza la moneda ya existente en la BD
+        nuevaMoneda = { nombre: monedas[moneda]["symbol"], precio: monedas[moneda]["quote"]["USD"]["price"], supply: monedas[moneda]["circulating_supply"] }
+        await monedaModel.findOneAndReplace({nombre: monedas[moneda]["symbol"]}, nuevaMoneda)
+      }
     }
 
     //console.log(monedas);
