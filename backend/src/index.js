@@ -4,7 +4,7 @@ require('./database')
 const PORT = process.env.PORT || 4000 
 
 //start the server
-app.listen(PORT, () => {
+server = app.listen(PORT, () => {
     console.log(`Example app listening at http://localhost:${PORT}`);
 })
 
@@ -15,3 +15,4 @@ app.get('/', (req, res) => {
 app.use(require('./routes/Transaction.routes'));
 app.use(require('./routes/login.routes'));
 
+module.exports = server;
