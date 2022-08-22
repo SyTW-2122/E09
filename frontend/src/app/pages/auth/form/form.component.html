@@ -1,68 +1,40 @@
 <!--Registrase/Sign in-->
 
-<div class="tab-pane fade show active">
+<div class="formulario">
   <form>
     <div class="text-center mb-3">
-      <p>Sign up with:</p>
-      <button type="button" class="btn btn-link btn-floating mx-1">
-        <i class="fab fa-facebook-f"></i>
-      </button>
-
-      <button type="button" class="btn btn-link btn-floating mx-1">
-        <i class="fab fa-google"></i>
-      </button>
-
-      <button type="button" class="btn btn-link btn-floating mx-1">
-        <i class="fab fa-twitter"></i>
-      </button>
-
-      <button type="button" class="btn btn-link btn-floating mx-1">
-        <i class="fab fa-github"></i>
-      </button>
+      <p>Registrarse</p>
     </div>
-
-    <p class="text-center">or:</p>
-
-    <!-- Name input -->
-    <div class="form-outline mb-4">
-      <input type="text" id="registerName" class="form-control" />
-      <label class="form-label" for="registerName">Name</label>
+    <!-- Nombre -->
+    <div class="mb-3 row">
+      <label for="exampleFormControlInput1" class="form-label">Nombre</label>
+      <input class="form-control" type="text" placeholder="Default input" aria-label="default input example">
     </div>
-
-    <!-- Username input -->
-    <div class="form-outline mb-4">
-      <input type="text" id="registerUsername" class="form-control" />
-      <label class="form-label" for="registerUsername">Username</label>
+    <!-- Nombre de usuario -->
+    <div class="mb-3 row">
+      <label for="exampleFormControlInput1" class="form-label">Nombre de usuario</label>
+      <input class="form-control" type="text" placeholder="Default input" aria-label="default input example">
     </div>
-
-    <!-- Email input -->
-    <div class="form-outline mb-4">
-      <input type="email" id="registerEmail" class="form-control" />
-      <label class="form-label" for="registerEmail">Email</label>
+    <!-- Correo electrónico -->
+    <div class="mb-3 row">
+      <label for="exampleFormControlInput1" class="form-label">Correo electrónico</label>
+      <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
     </div>
-
-    <!-- Password input -->
-    <div class="form-outline mb-4">
-      <input type="password" id="registerPassword" class="form-control" />
-      <label class="form-label" for="registerPassword">Password</label>
+    <!-- Contraseña -->
+    <div class="mb-3 row">
+      <label for="inputPassword1" class="form-label">Contraseña</label>
+        <input type="password" class="form-control" id="inputPassword">
     </div>
-
-    <!-- Repeat Password input -->
-    <div class="form-outline mb-4">
-      <input type="password" id="registerRepeatPassword" class="form-control" />
-      <label class="form-label" for="registerRepeatPassword">Repeat password</label>
-    </div>
-
-    <!-- Checkbox -->
-    <div class="form-check d-flex justify-content-center mb-4">
-      <input class="form-check-input me-2" type="checkbox" value="" id="registerCheck" checked
-        aria-describedby="registerCheckHelpText" />
-      <label class="form-check-label" for="registerCheck">
-        I have read and agree to the terms
-      </label>
+    <!-- Repetir contraseña -->
+    <div class="mb-3 row">
+      <label for="inputPassword2" class="form-label">Verificar contraseña</label>
+        <input type="password" class="form-control" id="inputPassword">
     </div>
 
     <!-- Submit button -->
-    <button type="submit" class="btn btn-primary btn-block mb-3">Sign in</button>
+    <div class="text-center mb-3">
+      <button type="submit" class="btn btn-primary btn-block mb-6">Registrate</button>
+    </div>
+    
   </form>
 </div>
