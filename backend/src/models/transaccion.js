@@ -1,4 +1,3 @@
-const monedaModel = require("./moneda")
 const mongoose = require("mongoose"); 
 
 const transaccionSchema = mongoose.Schema({
