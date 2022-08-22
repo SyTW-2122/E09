@@ -1,5 +1,4 @@
 const axios = require('axios');
-const { default: mongoose } = require('mongoose');
 require('../database')
 const monedaModel = require("../models/moneda")
 
