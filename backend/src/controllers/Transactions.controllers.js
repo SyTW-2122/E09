@@ -19,12 +19,12 @@ TransactionsCtrl.getTransaction = async (req, res) => {
     res.json(transaction) 
 }
 TransactionsCtrl.updateTransaction = async (req, res) => { 
-    const transaction = await Transaction.findByIdAndUpdate(req.params.id, req.body)
+    const transaction = await Transaction.findByIdAndUpdate(req.params.nombreUsuario, req.body)
     console.log(req.params.id)
     res.json(`Se ha actualizado el objeto con id: ${req.params.id}`)
 }
 TransactionsCtrl.deleteTransaction = async (req, res) => { 
-    const transaction = await Transaction.findByIdAndDelete(req.params.id)
+    const transaction = await Transaction.findByIdAndDelete(req.params.nombreUsuario)
     console.log(req.params.id)
     res.json(`Se ha eliminado el siguiente objeto: ${transaction}`)
 }
