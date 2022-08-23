@@ -8,6 +8,6 @@ const transaccionSchema = mongoose.Schema({
   tipo: { type: String, required: true},
   fecha: { type: Date, required: true},
 })
-const transaccionModel= mongoose.model('Transaccion',transaccionSchema) 
+const transaccionModel= mongoose.model('Transaction',transaccionSchema) 
 transaccionModel.fecha instanceof Date
 module.exports = transaccionModel

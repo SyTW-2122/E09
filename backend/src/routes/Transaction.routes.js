@@ -8,11 +8,11 @@ router.get('/transactions', TransactionsCtrl.getTransactions)
 
 router.post('/transactions', TransactionsCtrl.createTransaction)
 
-router.get('/transactions/:id', TransactionsCtrl.getTransaction)
+router.get('/transactions/:nombre', TransactionsCtrl.getTransaction)
 
-router.put('/transactions/:id', TransactionsCtrl.updateTransaction)
+router.put('/transactions/:nombre', TransactionsCtrl.updateTransaction)
 
-router.delete('/transactions/:id', TransactionsCtrl.deleteTransaction)
+router.delete('/transactions/:nombre', TransactionsCtrl.deleteTransaction)
 
 
 module.exports = router

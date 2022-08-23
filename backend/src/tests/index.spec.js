@@ -69,21 +69,21 @@ describe('App', () => {
                 .expect(200)
         })
         test('delete transaction by username should respond with 200 status code and json', async () => {
-            await api.delete('/transactions/:Juan')
+            await api.delete('/transactions/Juan')
                 .expect(200)
         })
         test('get transaction by username should respond with 200 status code and json', async () => {
-            await api.get('/transactions/:Pepito')
+            await api.get('/transactions/Pepito')
                 .expect(200)
                 .expect('Content-Type', /application\/json/)
         })
         test('put transaction by username should respond with 200 status code and json', async () => {
-            await api.put('/transactions/:Pepito').send(transacciones[0])
+            await api.put('/transactions/Pepito').send(transacciones[0])
                 .expect(200)
         })
     })
 })
-afterAll(() => {
-    mongoose.connection.close()
-    server.close()
+afterAll(async () => {
+    await mongoose.connection.close()
+    await server.close()
 })
