@@ -14,8 +14,8 @@ TransactionsCtrl.createTransaction = async (req, res) => {
     res.send(`This object was created:  ${newTransaction}`) 
 }
 TransactionsCtrl.getTransaction = async (req, res) => { 
-    const transaction = await Transaction.findById(req.params.id)
-    console.log(req.params.id)
+    const transaction = await Transaction.findById(req.params.nombreUsuario)
+    console.log(req.params.nombreUsuario)
     res.json(transaction) 
 }
 TransactionsCtrl.updateTransaction = async (req, res) => { 
@@ -28,6 +28,4 @@ TransactionsCtrl.deleteTransaction = async (req, res) => {
     console.log(req.params.id)
     res.json(`Se ha eliminado el siguiente objeto: ${transaction}`)
 }
-
-
 module.exports = TransactionsCtrl
