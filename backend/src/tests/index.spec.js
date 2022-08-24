@@ -5,20 +5,12 @@ const api = supertest(app)
 const server = require('../index')
 const usuarios = [
     {
-        nombreUsuario: "Juan",
-        nombreMoneda: "BTC",
-        cantidad: 5,
-        precio: 10,
-        tipo: "compra",
-        fecha: "10-5-22",
+        username: "pruebaaaa",
+        password: "Aaa1223",
     },
     {
-        nombreUsuario: "pedro",
-        nombreMoneda: "ETH",
-        cantidad: 7,
-        precio: 100,
-        tipo: "compra",
-        fecha: "10-5-22",
+        username: "pedro",
+        password: "123QW",
     },
 ]
 const transacciones = [
@@ -87,8 +79,13 @@ describe('App', () => {
             await api.post('/register/').send(usuarios[0])
                 .expect(200)
         })
+
         test('login should respond with 200 status code', async () => {
-            await api.post('/login/').send(usuarios[0])
+            await api.delete('/dUser/').send(usuarios[0])
+                .expect(200)
+        })
+        test('delete should respond with 200 status code', async () => {
+            await api.post('/register/').send(usuarios[0])
                 .expect(200)
         })
     })
