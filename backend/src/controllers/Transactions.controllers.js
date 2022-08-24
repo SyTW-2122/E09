@@ -5,7 +5,6 @@ const Transaction = require('../models/transaccion')
 
 TransactionsCtrl.getTransactions = async (req, res) => { 
     const transactions = await Transaction.find()
-    console.log("AAA")
     res.json(transactions) 
 }
 TransactionsCtrl.createTransaction = async (req, res) => { 

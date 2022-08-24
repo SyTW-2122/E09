@@ -1,5 +1,6 @@
 const app = require('./app');
 require('./database')
+//require('./cmc-api/CMC') Se descomenta para actualizar las monedas
 
 const PORT = process.env.PORT || 4000 
 
