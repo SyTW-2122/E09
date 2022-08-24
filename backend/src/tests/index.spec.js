@@ -79,13 +79,24 @@ describe('App', () => {
             await api.post('/register/').send(usuarios[0])
                 .expect(200)
         })
+        test('login should respond with 200 status code', async () => {
+            await api.post('/login/').send(usuarios[0])
+                .expect(200)
+        })
 
         test('login should respond with 200 status code', async () => {
             await api.delete('/dUser/').send(usuarios[0])
                 .expect(200)
         })
-        test('delete should respond with 200 status code', async () => {
-            await api.post('/register/').send(usuarios[0])
+
+    })
+    describe('prueba monedas', () => {
+        test('register should respond with 200 status code', async () => {
+            await api.get('/monedas/')
+                .expect(200)
+        })
+        test('register should respond with 200 status code', async () => {
+            await api.get('/monedas/BTC')
                 .expect(200)
         })
     })
