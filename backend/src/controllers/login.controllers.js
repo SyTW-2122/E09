@@ -22,7 +22,7 @@ LoginCtrl.login = (req, res) => {
     const username = req.body.username;
     const password = req.body.password;
 
-    usuario.findOne({username}, (err,user) => {
+    usuario.findOne({"username": username}, (err,user) => {
         if(err){
             res.status(500).send("Error al autenticar al usuario");
         }
@@ -69,6 +69,38 @@ LoginCtrl.validateToken = function(req, res, next) {
             }
         })
     }
+}
+
+LoginCtrl.deleteUser = async function(req,res) {
+    const userToDelete = req.body.username
+    const userPassw = req.body.password
+    usuario.findOne({"username": userToDelete}, (err, user) => {
+        if(err){
+            res.status(500).send("Error al autenticar al usuario");
+        }
+        else if(!user){
+            res.status(500).send("El usuario no existe")
+        }
+        else {
+            user.isCorrectPassword(userPassw, (err,result) => {
+                if(err){
+                    res.status(500).send("Error al autenticar")
+                }
+                else if(result) {
+                    usuario.findOneAndDelete({"username": userToDelete}, (err) => {
+                        if (err)
+                            console.log(err)
+                        else {
+                            res.status(200).send(`El usuario ${userToDelete} ha sido eliminado correctamente`)
+                        }
+                    })
+                }
+                else {
+                    res.status(500).send("Usuario y/o contraseña incorrecta")
+                }
+            });
+        }
+    })
 }
 
 module.exports = LoginCtrl

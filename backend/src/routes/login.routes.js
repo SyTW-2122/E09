@@ -12,4 +12,6 @@ router.get('/prueba', LoginCtrl.validateToken, (req, res) => {
     res.send(`${req.user.username} ha accedido a prueba`)
 })
 
+router.delete('/dUser', LoginCtrl.deleteUser)
+
 module.exports = router
