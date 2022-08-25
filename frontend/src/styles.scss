@@ -1,6 +1,17 @@
 /* You can add global styles to this file, and also import other style files*/
 
-body { height: 100%;}
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { 
+  margin: 0; 
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  height: 100%;
+  width: 100%;
+  position: relative;
+  padding-bottom: 1em;
+  min-height: 100vh;
+}
 
-
+footer {
+  padding: 1em 0;
+  position: absolute;
+  width: 100%;
+}
