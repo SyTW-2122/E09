@@ -75,4 +75,4 @@ setInterval(function() {
       resolve(monedas);
     }
   });
-}, 10000)
+}, 300000)
