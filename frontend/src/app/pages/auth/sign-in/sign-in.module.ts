@@ -1,10 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Form2Module } from 'src/app/pages/auth//form2/form2.module';
+import {RouterModule} from '@angular/router'
 
 
 import { SignInRoutingModule } from './sign-in-routing.module';
 import { SignInComponent } from './sign-in.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 
 @NgModule({
@@ -14,7 +16,12 @@ import { SignInComponent } from './sign-in.component';
   imports: [
     CommonModule,
     SignInRoutingModule,
-    Form2Module
+    RouterModule,
+    ReactiveFormsModule,
+    SharedModule
+  ],
+  exports: [
+    SignInComponent
   ]
 })
 export class SignInModule { }

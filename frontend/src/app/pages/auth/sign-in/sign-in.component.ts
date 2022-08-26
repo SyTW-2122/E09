@@ -1,16 +1,23 @@
 import { Component, OnInit } from '@angular/core';
-import { LoginService } from 'src/app/services/login.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-sign-in',
-  template: '<app-form2><app-form2>',
+  templateUrl: './sign-in.component.html',
   styleUrls: ['./sign-in.component.scss']
 })
 export class SignInComponent implements OnInit {
+  form: FormGroup;
+  loading = false;
+  constructor(private fb: FormBuilder, private _snackBar: MatSnackBar) {
+    this.form = this.fb.group({
+      email: ['', Validators.required],
+      password: ['', Validators.required]
+    })
+   }
 
-  constructor(private loginService: LoginService) { }
-
-  ngOnInit(): void {
+  ngOnInit(): void { 
     /*let body: Object = {
       "username": "Andres",
       "password": "qwerty"
@@ -21,9 +28,31 @@ export class SignInComponent implements OnInit {
     )*/
   }
 
-  login() {
-    // Este sería el método que se activa cuando se presiona el botón
-    // Recoge los datos de los campos de texto y mandárselos al backend 
+  ingresar () {
+    const email = this.form.value.email;
+    const password = this.form.value.password;
+
+    if(email == 'aaa' && password ==   'aaa') {
+      this.fakeLoading();
+    } else {
+      this.error();
+      this.form.reset();
+    }
   }
 
+  error() {
+    this._snackBar.open('Usuario o contraseña no son válidos','', {
+      duration: 5000,
+      horizontalPosition: 'center',
+      verticalPosition: 'bottom'
+    });
+  }
+
+  fakeLoading() {
+    this.loading = true;
+    setTimeout(() => {
+      // Se redirecciona al dashboard
+      this.loading = false;
+    },1500);
+  }
 }
