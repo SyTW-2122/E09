@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { MonedasService } from 'src/app/services/monedas.service';
 
 export interface PeriodicElement {
   nombre: string;
@@ -46,9 +47,13 @@ export class CriptomonedasComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
-  constructor() { }
+  constructor(private monedasService: MonedasService) { }
 
   ngOnInit(): void {
+    this.monedasService.getMonedas().subscribe(
+      res => console.log(res),
+      err => console.log(err)
+    )
   }
 
   ngAfterViewInit() {
