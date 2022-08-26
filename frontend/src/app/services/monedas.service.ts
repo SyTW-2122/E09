@@ -9,6 +9,8 @@ export class MonedasService {
 }*/
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Monedas } from '../pages/criptomonedas/criptomonedas.component';
+
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +21,6 @@ export class MonedasService {
 
   constructor(private http: HttpClient) { }
   getMonedas()  {
-    return this.http.get(this.URL_API)
+    return this.http.get<Monedas[]>(this.URL_API)
   }
 }

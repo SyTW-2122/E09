@@ -11,12 +11,7 @@
   </mat-form-field>
 
   <div class="mat-elevation-z8">
-    <table mat-table [dataSource]="dataSource" matSort>
-      <ng-container matColumnDef="position">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> No. </th>
-        <td mat-cell *matCellDef="let element"> {{element.position}} </td>
-      </ng-container>
-    
+    <table mat-table [dataSource]="dataSource" matSort>    
       <ng-container matColumnDef="nombre">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Criptomoneda </th>
         <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
@@ -27,24 +22,9 @@
         <td mat-cell *matCellDef="let element"> {{element.precio}} </td>
       </ng-container>
 
-      <ng-container matColumnDef="horas">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> 24h% </th>
-        <td mat-cell *matCellDef="let element"> {{element.horas}} </td>
-      </ng-container>
-    
-      <ng-container matColumnDef="dias">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> 7d% </th>
-        <td mat-cell *matCellDef="let element"> {{element.dias}} </td>
-      </ng-container>
-  
-      <ng-container matColumnDef="volumen">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Volumen (24h) </th>
-        <td mat-cell *matCellDef="let element"> {{element.volumen}} </td>
-      </ng-container>
-  
-      <ng-container matColumnDef="capital">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Capitalización de mercado </th>
-        <td mat-cell *matCellDef="let element"> {{element.capital}} </td>
+      <ng-container matColumnDef="supply">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Supply </th>
+        <td mat-cell *matCellDef="let element"> {{element.supply}} </td>
       </ng-container>
   
       <ng-container matColumnDef="acciones">
