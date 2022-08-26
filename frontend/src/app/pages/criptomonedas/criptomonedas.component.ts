@@ -19,11 +19,8 @@ export interface Monedas {
 export class CriptomonedasComponent implements OnInit {
   
   listMonedas: Monedas[] = [];  
-  displayedColumns: string[] = ['nombre', 'precio', 'supply'];
+  displayedColumns: string[] = ['nombre', 'precio', 'supply', 'acciones'];
   dataSource= new MatTableDataSource(this.listMonedas);
-
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
-  @ViewChild(MatSort) sort!: MatSort;
 
   constructor(private monedasService: MonedasService) { }
 
@@ -33,6 +30,9 @@ export class CriptomonedasComponent implements OnInit {
       err => console.log(err)
     )
   }
+
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
