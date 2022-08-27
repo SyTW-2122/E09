@@ -10,7 +10,7 @@ export class LoginService {
 
   constructor(private http: HttpClient) { }
 
-  getUser(body: Object)  {
+  loginUser(body: Object)  {
     return this.http.post(this.URL_API ,body)
   }
 }

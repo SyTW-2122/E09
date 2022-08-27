@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { LoginService } from 'src/app/services/login.service';
 
 @Component({
   selector: 'app-sign-in',
@@ -10,7 +11,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class SignInComponent implements OnInit {
   form: FormGroup;
   loading = false;
-  constructor(private fb: FormBuilder, private _snackBar: MatSnackBar) {
+  constructor(private fb: FormBuilder, private _snackBar: MatSnackBar, private client: LoginService) {
     this.form = this.fb.group({
       email: ['', Validators.required],
       password: ['', Validators.required]
@@ -32,12 +33,17 @@ export class SignInComponent implements OnInit {
     const email = this.form.value.email;
     const password = this.form.value.password;
 
-    if(email == 'aaa' && password ==   'aaa') {
-      this.fakeLoading();
-    } else {
-      this.error();
-      this.form.reset();
-    }
+    this.client.loginUser({username: email, password: password}).subscribe({
+      next: (res) => { // Se logea correctamente
+        console.log(res)
+        this.fakeLoading();
+      },
+      error : (e) => { // Error al logearse
+        console.log(e)
+        this.error();
+        this.form.reset();
+      }
+    })  
   }
 
   error() {

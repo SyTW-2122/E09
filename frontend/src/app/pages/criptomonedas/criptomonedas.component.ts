@@ -25,10 +25,14 @@ export class CriptomonedasComponent implements OnInit {
   constructor(private monedasService: MonedasService) { }
 
   ngOnInit(): void {
-    this.monedasService.getMonedas().subscribe(
-      res => this.dataSource = new MatTableDataSource(res),
-      err => console.log(err)
-    )
+    this.monedasService.getMonedas().subscribe({
+     next:  (res) => {
+      this.dataSource = new MatTableDataSource(res)
+      },
+     error: (e) => {
+      console.log(e)
+      } 
+    })
   }
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
