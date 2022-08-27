@@ -5,10 +5,14 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MonedasService } from 'src/app/services/monedas.service';
 
 export interface Monedas {
-  nombre: string;
-  precio: number;
-  supply: number;
-
+  nombre: String;
+  symbol: String;
+  precio: Number;
+  supply: Number;
+  p24h: Number;
+  p7d: Number;
+  marketcap: Number;
+  circulatingSupply: Number;
 }
 @Component({
   selector: 'app-criptomonedas',
@@ -25,9 +29,10 @@ export class CriptomonedasComponent implements OnInit {
   constructor(private monedasService: MonedasService) { }
 
   ngOnInit(): void {
+    console.log(1)
     this.monedasService.getMonedas().subscribe({
      next:  (res) => {
-      this.dataSource = new MatTableDataSource(res)
+        this.dataSource = new MatTableDataSource(res)
       },
      error: (e) => {
       console.log(e)
@@ -39,13 +44,17 @@ export class CriptomonedasComponent implements OnInit {
   @ViewChild(MatSort) sort!: MatSort;
 
   ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
+    setTimeout(() => {
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+    },100)
   }
 
   applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
+    setTimeout(() => {
+      const filterValue = (event.target as HTMLInputElement).value;
+      this.dataSource.filter = filterValue.trim().toLowerCase();
+  }, 100)
   }
 
 }
