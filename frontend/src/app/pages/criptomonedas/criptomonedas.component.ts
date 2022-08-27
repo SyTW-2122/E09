@@ -19,7 +19,7 @@ export interface Monedas {
 export class CriptomonedasComponent implements OnInit {
   
   listMonedas: Monedas[] = [];  
-  displayedColumns: string[] = ['nombre', 'precio', 'supply', 'acciones'];
+  displayedColumns: string[] = ['nombre', 'symbol', 'precio', 'p1h', 'p24h', 'p7d' ,'marketcap', 'circulatingSupply',  'acciones'];
   dataSource= new MatTableDataSource(this.listMonedas);
 
   constructor(private monedasService: MonedasService) { }
