@@ -5,12 +5,13 @@ const api = supertest(app)
 const server = require('../index')
 const usuarios = [
     {
-        username: "pruebaaaa",
-        password: "Aaa1223",
+        username: "Prueba",
+        email: "Prueba@gmail.com",
+        password: "Contraseña",
     },
     {
-        username: "pedro",
-        password: "123QW",
+        email: "Prueba@gmail.com",
+        password: "Contraseña",
     },
 ]
 const transacciones = [
