@@ -32,22 +32,10 @@ const transacciones = [
         fecha: "10-5-22",
     },
 ]
-//start the server
-/*const server = app.listen(app.get('port'), () => {
-    console.log(`Example app listening at http://localhost:${app.get('port')}`);
-})*/
-
-
-
-/*app.use(require('../routes/Transaction.routes'));
-app.use(require('../routes/login.routes'));*/
-
-///////
 
 describe('App', () => {
     test('should respond with 200 status code', async () => {
         const response = await api.get('/');
-        //console.log(response)
         expect(response.statusCode).toBe(200);
     }
     );
