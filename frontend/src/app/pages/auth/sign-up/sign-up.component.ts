@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 import { RegisterService } from 'src/app/services/register.service';
 @Component({
   selector: 'app-sign-up',
@@ -10,7 +11,7 @@ import { RegisterService } from 'src/app/services/register.service';
 export class SignUpComponent implements OnInit {
   form: FormGroup;
   loading = false;
-  constructor(private fb: FormBuilder, private _snackBar: MatSnackBar, private client: RegisterService) {
+  constructor(private fb: FormBuilder, private _snackBar: MatSnackBar, private client: RegisterService, private router: Router) {
     this.form = this.fb.group({
       username: ['', Validators.required],
       email: ['', Validators.required],
@@ -28,22 +29,23 @@ export class SignUpComponent implements OnInit {
     const password2= this.form.value.password2;
     if (password != password2) {
       this.form.reset();
-      this.error("Las contraseñas deben de ser iguales");
+      this.msg("Las contraseñas deben de ser iguales");
       return
     }
 
     this.client.registerUser({username: username,email:email, password: password}).subscribe({
       next: (res: any) => { // Se registra correctamente
         this.form.reset()
-        this.error(res)
+        this.msg(res)
+        this.router.navigateByUrl('/sign-in')
       },
-      error : (e) => { // Error al logearse
-        this.error(e.error);
+      error : (e) => { // Error al registrarse
+        this.msg(e.error);
         this.form.reset();
       }
     })  
   }
-  error(err: string) {
+  msg(err: string) {
     this._snackBar.open(err,'', {
       duration: 5000,
       horizontalPosition: 'center',
