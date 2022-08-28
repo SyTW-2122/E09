@@ -4,30 +4,36 @@ const usuario = require('../models/usuario')
 const jwt = require('jsonwebtoken')
 LoginCtrl.register = (req, res) => {
     const username = req.body.username;
+    const email = req.body.email;
     const password = req.body.password;
 
-    const user = new usuario({username,password});
-
+    const user = new usuario({username,email,password});
     user.save((err) => {
         if(err) {
-            res.status(500).send("Error al registrar usuario")
-        }   
+            if(err.code == 11000) {
+                res.status(500).send("El usuario/email proporcionado ya existe.")
+            }
+            else {
+                res.status(500).send("Error al registrar el usuario")
+            }
+        }
         else {
             res.status(200).send("Usuario registrado")
         }
     });
+    
 }
 
 LoginCtrl.login = (req, res) => {
-    const username = req.body.username;
+    const email = req.body.email;
     const password = req.body.password;
 
-    usuario.findOne({"username": username}, (err,user) => {
+    usuario.findOne({"email": email}, (err,user) => {
         if(err){
             res.status(500).send("Error al autenticar al usuario");
         }
         else if(!user){
-            res.status(500).send("El usuario no existe")
+            res.status(500).send("El email no existe")
         }
         else {
             user.isCorrectPassword(password, (err,result) => {
@@ -35,7 +41,7 @@ LoginCtrl.login = (req, res) => {
                     res.status(500).send("Error al autenticar")
                 }
                 else if(result) {
-                    const user={username:username}
+                    const user={email:email}
                     const accesToken = generateAccesToken(user)
                     res.header('authorization', accesToken).json({
                         expiresIn: '300',

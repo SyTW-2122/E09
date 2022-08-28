@@ -29,7 +29,6 @@ export class HomeComponent implements OnInit {
   constructor(private monedasService: MonedasService) { }
 
   ngOnInit(): void {
-    console.log(1)
     this.monedasService.getMonedas().subscribe({
      next:  (res) => {
         this.dataSource = new MatTableDataSource(res)
