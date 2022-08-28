@@ -38,7 +38,7 @@ LoginCtrl.login = (req, res) => {
                     const user={username:username}
                     const accesToken = generateAccesToken(user)
                     res.header('authorization', accesToken).json({
-                        message: 'Usuario autenticado',
+                        expiresIn: '300',
                         token: accesToken
                     })
 
