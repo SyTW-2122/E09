@@ -18,24 +18,16 @@ export class SignInComponent implements OnInit {
     })
    }
 
-  ngOnInit(): void { 
-    /*let body: Object = {
-      "username": "Andres",
-      "password": "qwerty"
-    }
-    this.loginService.getUser(body).subscribe(
-      res => console.log(res),
-      err => console.log(err)
-    )*/
-  }
+  ngOnInit(): void { }
 
   ingresar () {
     const email = this.form.value.email;
     const password = this.form.value.password;
 
     this.client.loginUser({username: email, password: password}).subscribe({
-      next: (res) => { // Se logea correctamente
+      next: (res: any) => { // Se logea correctamente
         console.log(res)
+        this.client.saveToken(res.token,res.expiresIn)
         this.fakeLoading();
       },
       error : (e) => { // Error al logearse
