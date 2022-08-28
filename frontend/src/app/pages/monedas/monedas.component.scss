@@ -1,0 +1,91 @@
+.breadcrumb {
+margin-top: 2%;
+position: absolute;
+width: 100%;
+}
+
+.container {
+  position: absolute;
+  padding-top: 10%;
+  width: 100%;
+}
+
+.col {
+  //border: 1px solid #000;
+}
+
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+#col-datos1{
+  margin-top: 24px;
+  margin-bottom: 5vh;
+  text-align: center;
+  min-height: 10vh;
+}
+
+#col-datos2{
+  margin-top: 24px;
+  margin-bottom: 5vh;
+  text-align: center;
+}
+
+#col-datos3{
+  margin-top: 24px;
+  margin-bottom: 5vh;
+  text-align: center;
+}
+
+#row-datos1 {
+  border-right: 1px solid black;
+
+}
+
+#row-datos2 {
+  border-right: 1px solid black;
+  min-height: 5vh;
+}
+
+#row-datos3 {
+
+}
+
+#espacio {
+  min-height: 5vh;
+  border-bottom: 1px solid black;
+}
+
+#espacio-top {
+  min-height: 5vh;
+  border-top: 1px solid black;
+}
+
+.badge {
+  font-family: Arial;
+  position: relative;
+}
+
+#symbol-badge {
+  font: caption;
+  text-align: center;
+  font-size: large;
+}
+
+#graficos {
+  text-align: center;
+  font-size: large;
+  border-right: 1px solid black;
+  min-height: 40vh;
+  padding-bottom: 5%;
+}
+
+#datos {
+  text-align: center;
+  font-size: large;
+}
+

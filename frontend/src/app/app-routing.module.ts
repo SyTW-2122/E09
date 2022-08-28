@@ -8,6 +8,7 @@ const routes: Routes = [
   { path: 'sign-up', loadChildren: () => import('./pages/auth/sign-up/sign-up.module').then(m => m.SignUpModule) },
   { path: 'error', loadChildren: () => import('./pages/error/error.module').then(m => m.ErrorModule) },
   { path: 'dashboard', loadChildren: () => import('./pages/dashboard/dashboard.module').then(m => m.DashboardModule) },
+  { path: 'monedas', loadChildren: () => import('./pages/monedas/monedas.module').then(m => m.MonedasModule) },
   { path: '**', redirectTo: '/error', pathMatch: 'full'}];
 
 @NgModule({
