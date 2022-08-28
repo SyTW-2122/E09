@@ -9,7 +9,7 @@ export class MonedasService {
 }*/
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Monedas } from '../pages/criptomonedas/criptomonedas.component';
+import { Monedas } from '../pages/home/home.component';
 
 
 @Injectable({
