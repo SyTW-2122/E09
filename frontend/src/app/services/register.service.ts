@@ -12,6 +12,7 @@ export class RegisterService {
   constructor(private http: HttpClient) { }
 
   registerUser(body: Object)  {
+    console.log(body)
     return this.http.post(this.URL_API ,body, {responseType: "text"})
   }
 }

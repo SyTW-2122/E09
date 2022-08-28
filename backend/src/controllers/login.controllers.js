@@ -4,18 +4,24 @@ const usuario = require('../models/usuario')
 const jwt = require('jsonwebtoken')
 LoginCtrl.register = (req, res) => {
     const username = req.body.username;
+    const email = req.body.email;
     const password = req.body.password;
 
-    const user = new usuario({username,password});
+    const user = new usuario({username,email,password});
+    if(usuario.findOne(user).size()!=0){
+    res.status(500).send("El usuario ya esta creado")
+}
+    else {
 
-    user.save((err) => {
-        if(err) {
-            res.status(500).send("Error al registrar usuario")
-        }   
-        else {
-            res.status(200).send("Usuario registrado")
-        }
-    });
+        user.save((err) => {
+            if(err) {
+                res.status(500).send("Error al registrar usuario")
+            }
+            else {
+                res.status(200).send("Usuario registrado")
+            }
+        });
+    }
 }
 
 LoginCtrl.login = (req, res) => {

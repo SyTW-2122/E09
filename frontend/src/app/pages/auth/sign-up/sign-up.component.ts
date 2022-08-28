@@ -22,6 +22,7 @@ export class SignUpComponent implements OnInit {
   ngOnInit(): void { }
 
   registrar () {
+    const username = this.form.value.username;
     const email = this.form.value.email;
     const password = this.form.value.password;
     const password2= this.form.value.password2;
@@ -31,9 +32,10 @@ export class SignUpComponent implements OnInit {
       return
     }
 
-    this.client.registerUser({username: email, password: password}).subscribe({
-      next: (res: any) => { // Se logea correctamente
-        console.log(res)
+    this.client.registerUser({username: username,email:email, password: password}).subscribe({
+      next: (res: any) => { // Se registra correctamente
+        this.form.reset()
+        this.error(res)
       },
       error : (e) => { // Error al logearse
         this.error(e.error);
