@@ -6,8 +6,9 @@ import { MonedasService} from 'src/app/services/monedas.service'
   templateUrl: './monedas.component.html',
   styleUrls: ['./monedas.component.scss']
 })
-export class MonedasComponent implements OnInit {
 
+export class MonedasComponent implements OnInit {
+  datosM!:any
   constructor(private monedaService : MonedasService) { }
 
   ngOnInit(): void {
@@ -19,7 +20,7 @@ export class MonedasComponent implements OnInit {
     if (moneda != null) {
       this.monedaService.getMoneda(moneda).subscribe({
         next: (res) => {
-          console.log(res);
+          this.datosM = res
         },
         error: (e:any) => {
           console.log(e);
