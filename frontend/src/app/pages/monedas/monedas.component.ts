@@ -17,15 +17,16 @@ export class MonedasComponent implements OnInit {
 
   datosMoneda() {
     let moneda = localStorage.getItem("MONEDA")
-    if (moneda != null) {
-      this.monedaService.getMoneda(moneda).subscribe({
-        next: (res) => {
-          this.datosM = res
-        },
-        error: (e:any) => {
-          console.log(e);
-        }
-      });
+    if (moneda == null) {
+      moneda = "Bitcoin"
     }
+    this.monedaService.getMoneda(moneda).subscribe({
+      next: (res) => {
+        this.datosM = res
+      },
+      error: (e:any) => {
+        console.log(e);
+      }
+    });
   }
 }
