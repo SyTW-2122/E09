@@ -1,5 +1,7 @@
 <body>
-  <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
+  <nav
+    style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);"
+    aria-label="breadcrumb">
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a href="#">Home</a></li>
       <li class="breadcrumb-item active" aria-current="page">Monedas</li>
@@ -27,10 +29,11 @@
         <div class="row" id="row-datos1">
           <p style="color:#D61C4E;">
             <b>Marketcap</b>
-            <a class="pointer" style="color: primary" matTooltip="Valor total del mercado de la oferta circulante" matTooltipClass="tooltip">
+            <a class="pointer" style="color: primary" matTooltip="Valor total del mercado de la oferta circulante"
+              matTooltipClass="tooltip">
               <mat-icon>info</mat-icon>
             </a>
-          </p> 
+          </p>
           <p>
             <b>${{datosM.marketcap}} </b>
           </p>
@@ -42,7 +45,8 @@
         <div class="row" id="row-datos2">
           <p style="color:#D61C4E;">
             <b>Volumen (24h)</b>
-            <a class="pointer" style="color: primary" matTooltip="Cantidad de criptomonedas que fueron tradeadas" matTooltipClass="tooltip">
+            <a class="pointer" style="color: primary" matTooltip="Cantidad de criptomonedas que fueron tradeadas"
+              matTooltipClass="tooltip">
               <mat-icon>info</mat-icon>
             </a>
           </p>
@@ -57,10 +61,11 @@
         <div class="row" id="row-datos3">
           <p style="color:#D61C4E;">
             <b>Acciones en circulación</b>
-            <a class="pointer" style="color: primary" matTooltip="Cantidad de monedas en circulación en el mercado de origen público" matTooltipClass="tooltip">
+            <a class="pointer" style="color: primary"
+              matTooltip="Cantidad de monedas en circulación en el mercado de origen público" matTooltipClass="tooltip">
               <mat-icon>info</mat-icon>
             </a>
-          </p> 
+          </p>
           <p>
             <b>{{datosM.circulatingSupply}} {{datosM.symbol}}</b>
           </p>
@@ -74,10 +79,11 @@
         <div class="row" id="row-datos1">
           <p style="color:#D61C4E;">
             <b>Market dom</b>
-            <a class="pointer" style="color: primary" matTooltip="Valor total del mercado de la oferta circulante" matTooltipClass="tooltip">
+            <a class="pointer" style="color: primary" matTooltip="Valor total del mercado de la oferta circulante"
+              matTooltipClass="tooltip">
               <mat-icon>info</mat-icon>
             </a>
-          </p> 
+          </p>
           <p>
             <b>${{datosM.marketdom}} </b>
           </p>
@@ -89,7 +95,8 @@
         <div class="row" id="row-datos2">
           <p style="color:#D61C4E;">
             <b>Max Supply</b>
-            <a class="pointer" style="color: primary" matTooltip="Cantidad de criptomonedas que fueron tradeadas" matTooltipClass="tooltip">
+            <a class="pointer" style="color: primary" matTooltip="Cantidad de criptomonedas que fueron tradeadas"
+              matTooltipClass="tooltip">
               <mat-icon>info</mat-icon>
             </a>
           </p>
@@ -104,10 +111,11 @@
         <div class="row" id="row-datos3">
           <p style="color:#D61C4E;">
             <b>Volumen change (24h)</b>
-            <a class="pointer" style="color: primary" matTooltip="Cantidad de monedas en circulación en el mercado de origen público" matTooltipClass="tooltip">
+            <a class="pointer" style="color: primary"
+              matTooltip="Cantidad de monedas en circulación en el mercado de origen público" matTooltipClass="tooltip">
               <mat-icon>info</mat-icon>
             </a>
-          </p> 
+          </p>
           <p>
             <b>{{datosM.volumenchange24h}} {{datosM.symbol}}</b>
           </p>
@@ -120,16 +128,17 @@
         <b>Variación de precios</b>
       </div>
     </div>
-    
+
     <div class="row" id="variacion">
       <div class="col" id="col-datos1">
         <div class="row" id="espacio-top"></div>
         <div class="row" id="row-datos1">
           <p style="color:#D61C4E;">
             <b>Cambio (1h)</b>
-          </p> 
+          </p>
           <p id="prueba">
-            <b>{{datosM.p1h.toFixed(3)}}%</b>
+            <b *ngIf="datosM.p1h.toFixed(3) < 0" class="negative">{{datosM.p1h.toFixed(3)}}</b>
+            <b *ngIf="datosM.p1h.toFixed(3) >= 0" class="positive">{{datosM.p1h.toFixed(3)}}</b>
           </p>
         </div>
         <div class="row" id="espacio"></div>
@@ -141,7 +150,8 @@
             <b>Cambio (24h)</b>
           </p>
           <p>
-            <b>{{datosM.p24h.toFixed(3)}}%</b>
+            <b *ngIf="datosM.p24h.toFixed(3) < 0" class="negative">{{datosM.p24h.toFixed(3)}}</b>
+            <b *ngIf="datosM.p24h.toFixed(3) >= 0" class="positive">{{datosM.p24h.toFixed(3)}}</b>
           </p>
         </div>
         <div class="row" id="espacio"></div>
@@ -151,9 +161,10 @@
         <div class="row" id="row-datos3">
           <p style="color:#D61C4E;">
             <b>Cambio (7d)</b>
-          </p> 
+          </p>
           <p>
-            <b>{{datosM.p7d.toFixed(3)}}%</b>
+            <b *ngIf="datosM.p7d.toFixed(3) < 0" class="negative">{{datosM.p7d.toFixed(3)}}</b>
+            <b *ngIf="datosM.p7d.toFixed(3) >= 0" class="positive">{{datosM.p7d.toFixed(3)}}</b>
           </p>
         </div>
         <div class="row" id="espacio"></div>
@@ -165,9 +176,10 @@
         <div class="row" id="row-datos1">
           <p style="color:#D61C4E;">
             <b>Cambio (30d)</b>
-          </p> 
+          </p>
           <p>
-            <b>${{datosM.p30d.toFixed(3)}}%</b>
+            <b *ngIf="datosM.p30d.toFixed(3) < 0" class="negative">{{datosM.p30d.toFixed(3)}}</b>
+            <b *ngIf="datosM.p30d.toFixed(3) >= 0" class="positive">{{datosM.p30d.toFixed(3)}}</b>
           </p>
         </div>
         <div class="row" id="espacio"></div>
@@ -179,7 +191,8 @@
             <b>Cambio (60d)</b>
           </p>
           <p>
-            <b>{{datosM.p60d.toFixed(3)}}%</b>
+            <b *ngIf="datosM.p60d.toFixed(3) < 0" class="negative">{{datosM.p60d.toFixed(3)}}</b>
+            <b *ngIf="datosM.p60d.toFixed(3) >= 0" class="positive">{{datosM.p60d.toFixed(3)}}</b>
           </p>
         </div>
         <div class="row" id="espacio"></div>
@@ -189,9 +202,10 @@
         <div class="row" id="row-datos3">
           <p style="color:#D61C4E;">
             <b>Cambio 90d</b>
-          </p> 
+          </p>
           <p>
-            <b>{{datosM.p90d.toFixed(3)}}%</b>
+            <b *ngIf="datosM.p90d.toFixed(3) < 0" class="negative">{{datosM.p90d.toFixed(3)}}</b>
+            <b *ngIf="datosM.p90d.toFixed(3) >= 0" class="positive">{{datosM.p90d.toFixed(3)}}</b>
           </p>
         </div>
         <div class="row" id="espacio"></div>

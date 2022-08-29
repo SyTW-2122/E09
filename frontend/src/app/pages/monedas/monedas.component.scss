@@ -1,7 +1,7 @@
 .breadcrumb {
-margin-top: 2%;
-position: absolute;
-width: 100%;
+  margin-top: 2%;
+  position: absolute;
+  width: 100%;
 }
 
 .container {
@@ -22,20 +22,28 @@ width: 100%;
   cursor: pointer;
 }
 
-#col-datos1{
+.positive {
+  color: rgb(41, 187, 53);
+}
+
+.negative {
+  color: rgb(238, 33, 6);
+}
+
+#col-datos1 {
   margin-top: 24px;
   margin-bottom: 5vh;
   text-align: center;
   min-height: 10vh;
 }
 
-#col-datos2{
+#col-datos2 {
   margin-top: 24px;
   margin-bottom: 5vh;
   text-align: center;
 }
 
-#col-datos3{
+#col-datos3 {
   margin-top: 24px;
   margin-bottom: 5vh;
   text-align: center;
@@ -51,9 +59,7 @@ width: 100%;
   min-height: 5vh;
 }
 
-#row-datos3 {
-
-}
+#row-datos3 {}
 
 #espacio {
   min-height: 5vh;
