@@ -3,6 +3,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { MonedasService } from 'src/app/services/monedas.service';
+import { Router } from '@angular/router';
 
 export interface Monedas {
   nombre: String;
@@ -25,13 +26,16 @@ export class HomeComponent implements OnInit {
   listMonedas: Monedas[] = [];  
   displayedColumns: string[] = ['nombre', 'symbol', 'precio', 'p1h', 'p24h', 'p7d' ,'marketcap', 'circulatingSupply',  'acciones'];
   dataSource= new MatTableDataSource(this.listMonedas);
-
-  constructor(private monedasService: MonedasService) { }
+  monedaName!: Monedas
+  constructor(private monedasService: MonedasService, private router: Router) {
+   }
 
   ngOnInit(): void {
     this.monedasService.getMonedas().subscribe({
      next:  (res) => {
         this.dataSource = new MatTableDataSource(res)
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
       },
      error: (e) => {
       console.log(e)
@@ -42,18 +46,13 @@ export class HomeComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  ngAfterViewInit() {
-    setTimeout(() => {
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
-    },100)
-  }
 
   applyFilter(event: Event) {
-    setTimeout(() => {
       const filterValue = (event.target as HTMLInputElement).value;
       this.dataSource.filter = filterValue.trim().toLowerCase();
-  }, 100)
   }
 
+  moneda(element: Monedas) {
+    localStorage.setItem("MONEDA", element.nombre.toString());
+  }
 }
