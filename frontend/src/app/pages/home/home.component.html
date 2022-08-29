@@ -39,27 +39,36 @@
   
         <ng-container matColumnDef="p1h">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> 1h % </th>
-          <td mat-cell *matCellDef="let element"> {{element.p1h.toFixed(3)}}% </td>
+          <td mat-cell *matCellDef="let element"> 
+            <span *ngIf="element.p1h >= 0" class="positive bold">{{element.p1h.toFixed(3)}}% </span>
+            <span *ngIf="element.p1h < 0" class="negative bold">{{element.p1h.toFixed(3)}}% </span>
+          </td>
         </ng-container>
   
         <ng-container matColumnDef="p24h">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> 24h % </th>
-          <td mat-cell *matCellDef="let element"> {{element.p24h.toFixed(3)}}% </td>
+          <td mat-cell *matCellDef="let element"> 
+            <span *ngIf="element.p24h >= 0" class="positive bold">{{element.p24h.toFixed(3)}}% </span>
+            <span *ngIf="element.p24h < 0" class="negative bold">{{element.p24h.toFixed(3)}}% </span>
+          </td>
         </ng-container>
   
         <ng-container matColumnDef="p7d">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> 7d % </th>
-          <td mat-cell *matCellDef="let element"> {{element.p7d.toFixed(3)}}% </td>
+          <td mat-cell *matCellDef="let element"> 
+            <span *ngIf="element.p7d >= 0" class="positive bold">{{element.p7d.toFixed(3)}}% </span>
+            <span *ngIf="element.p7d < 0" class="negative bold">{{element.p7d.toFixed(3)}}% </span>
+          </td>
         </ng-container>
   
         <ng-container matColumnDef="marketcap">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Capitalización de mercado </th>
-          <td mat-cell *matCellDef="let element"> ${{element.marketcap.toFixed()}} </td>
+          <td mat-cell *matCellDef="let element"> ${{format(element.marketcap.toFixed())}} </td>
         </ng-container>
   
         <ng-container matColumnDef="circulatingSupply">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Supply circulante </th>
-          <td mat-cell *matCellDef="let element"> {{element.circulatingSupply.toFixed()}} {{element.symbol}} </td>
+          <td mat-cell *matCellDef="let element"> {{format(element.circulatingSupply.toFixed())}} {{element.symbol}} </td>
         </ng-container>
     
         <ng-container matColumnDef="acciones">

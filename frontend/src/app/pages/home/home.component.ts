@@ -55,4 +55,8 @@ export class HomeComponent implements OnInit {
   moneda(element: Monedas) {
     localStorage.setItem("MONEDA", element.nombre.toString());
   }
+
+  format(numb: number) {
+    return Intl.NumberFormat('en-US').format(numb)
+  }
 }
