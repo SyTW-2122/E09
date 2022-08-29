@@ -14,7 +14,9 @@
           <p style="font-size: 32px"><b>{{datosM.nombre}}</b><span class="badge bg-primary me-2 m-2" id="symbol-badge" style="width: 10%;">{{datosM.symbol}}</span></p> 
         </div>
         <div class="row">
-          <span class="badge bg-primary col-2 me-2 mt-2" *ngFor="let tag of datosM.tags" style="width: 15%">{{tag}}</span>
+          <div class="badge bg-primary col-2 me-2 mt-2" *ngFor="let tag of datosM.tags; index as i" style="width: 20%">
+            <span *ngIf="i < 12">{{tag}}</span>
+          </div>        
         </div>
       </div>
       <div class="col">
