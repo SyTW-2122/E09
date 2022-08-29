@@ -19,10 +19,9 @@ setInterval(function() {
     }
     if (response) {
       // success
-      console.log("La petición a la API de CoinMarketCap ha sido realizada.")
+      console.log("La petición a la API de CoinMarketCap ha sido iniciada.")
       const monedas = response.data["data"];
       for (let moneda in monedas){
-        console.log("Hola")
         const monedaBD = await monedaModel.find({"nombre": monedas[moneda]["name"]})
         //console.log("Moneda: ", monedaBD)
         if (monedaBD.length == 0) {
@@ -70,7 +69,7 @@ setInterval(function() {
           await monedaModel.findOneAndReplace({nombre: monedas[moneda]["name"]}, nuevaMoneda)
         }
       }
-
+      console.log("La petición a la API de CoinMarketCap ha sido finalizada.")
       //console.log(JSON.stringify(monedas));
       resolve(monedas);
     }
