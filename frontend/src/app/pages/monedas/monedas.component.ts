@@ -29,4 +29,8 @@ export class MonedasComponent implements OnInit {
       }
     });
   }
+
+  format(numb: number) {
+    return Intl.NumberFormat('en-US').format(numb)
+  }
 }
