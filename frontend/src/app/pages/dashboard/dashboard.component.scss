@@ -1,0 +1,40 @@
+.breadcrumb {
+  margin-top: 2%;
+  position: absolute;
+  width: 100%;
+}
+
+.container {
+  position: absolute;
+  padding-top: 10%;
+  width: 100%;
+}
+
+.row {
+  border: 1px solid #000;
+}
+
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.positive {
+  color: rgb(41, 187, 53);
+}
+
+.negative {
+  color: rgb(238, 33, 6);
+}
+
+#titulo {
+  font-size: 32px;
+  min-height: 10vh;
+}
+
+#monedas {
+  min-height: 10vh;
+}
