@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MonedasService} from 'src/app/services/monedas.service'
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-monedas',
@@ -9,7 +10,7 @@ import { MonedasService} from 'src/app/services/monedas.service'
 
 export class MonedasComponent implements OnInit {
   datosM!:any
-  constructor(private monedaService : MonedasService) { }
+  constructor(private monedaService : MonedasService, private router: Router) { }
 
   ngOnInit(): void {
     this.datosMoneda();
@@ -32,5 +33,9 @@ export class MonedasComponent implements OnInit {
 
   format(numb: number) {
     return Intl.NumberFormat('en-US').format(numb)
+  }
+
+  toHome(){
+    this.router.navigateByUrl('/home')
   }
 }
