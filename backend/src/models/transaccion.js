@@ -1,7 +1,7 @@
 const mongoose = require("mongoose"); 
 
 const transaccionSchema = mongoose.Schema({
-  nombreUsuario: { type: String, required: true, unique: true},
+  nombreUsuario: { type: String, required: true},
   nombreMoneda: { type: String, required: true},
   cantidad: { type: Number, required: true},
   precio: { type: Number, required: true},
