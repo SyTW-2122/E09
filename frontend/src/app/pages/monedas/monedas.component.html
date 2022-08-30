@@ -22,7 +22,8 @@
       </div>
       <div class="col">
         <div class="row">
-          <p style="font-size: 32px"><b>${{datosM.precio.toFixed(5)}}  </b><span class="badge bg-primary">{{datosM.p1h.toFixed(3)}}%</span></p>
+          <p *ngIf="datosM.p1h < 0" style="font-size: 32px"><b>${{datosM.precio.toFixed(5)}}  </b><span class="badge bg-danger">{{datosM.p1h.toFixed(3)}}%</span></p>
+          <p *ngIf="datosM.p1h>= 0" style="font-size: 32px"><b>${{datosM.precio.toFixed(5)}}  </b><span class="badge bg-success">{{datosM.p1h.toFixed(3)}}%</span></p>
         </div>
       </div>
     </div>
