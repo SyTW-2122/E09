@@ -5,7 +5,6 @@ const Moneda = require('../models/moneda')
 
 monedasCtrl.getMonedas = async (req, res) => {
     const monedas = await Moneda.find()
-    console.log(monedas)
     monedas.forEach(moneda => (
          moneda.tags = null,
          moneda.marketdom= null,

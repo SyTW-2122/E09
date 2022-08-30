@@ -8,9 +8,7 @@ router.post('/register', LoginCtrl.register)
 
 router.post('/login', LoginCtrl.login)
 
-router.get('/prueba', LoginCtrl.validateToken, (req, res) => {
-    res.send(`${req.user.username} ha accedido a prueba`)
-})
+router.get('/validate', LoginCtrl.validateToken)
 
 router.delete('/dUser', LoginCtrl.deleteUser)
 

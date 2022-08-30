@@ -7,6 +7,7 @@ import { HttpClient } from '@angular/common/http';
 export class LoginService {
 
   URL_API = "http://localhost:4000/login"
+  URL_API2 = "http://localhost:4000/validate"
   private token!: string | null;
 
   constructor(private http: HttpClient) { }
@@ -32,5 +33,10 @@ export class LoginService {
       this.token = localStorage.getItem("ACCESS_TOKEN")
     }
     return this.token
+  }
+
+  validate(token: string){
+    let url = this.URL_API2 + '?accessToken=' + token
+    return this.http.get(url, {responseType: 'text'})
   }
 }
