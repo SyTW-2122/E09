@@ -6,8 +6,11 @@ import { HttpClient } from '@angular/common/http';
 })
 export class LoginService {
 
-  URL_API = "http://localhost:4000/login"
-  URL_API2 = "http://localhost:4000/validate"
+  //URL_API = "http://localhost:4000/login"
+  //URL_API2 = "http://localhost:4000/validate"
+  URL_API: string = "https://portfolio-e09.herokuapp.com/login"
+  URL_API2: string = "https://portfolio-e09.herokuapp.com/validate"
+
   private token!: string | null;
 
   constructor(private http: HttpClient) { }

@@ -6,7 +6,9 @@ import { HttpClient } from '@angular/common/http';
 })
 export class RegisterService {
 
-  URL_API = "http://localhost:4000/register"
+  //URL_API = "http://localhost:4000/register"
+  URL_API: string = "https://portfolio-e09.herokuapp.com/register"
+
   private token!: string | null;
 
   constructor(private http: HttpClient) { }
