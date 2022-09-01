@@ -29,6 +29,7 @@ LoginCtrl.login = (req, res) => {
     const password = req.body.password;
 
     usuario.findOne({"email": email}, (err,user) => {
+        let nombre=user.username
         if(err){
             res.status(500).send("Error al autenticar al usuario");
         }
@@ -41,13 +42,12 @@ LoginCtrl.login = (req, res) => {
                     res.status(500).send("Error al autenticar")
                 }
                 else if(result) {
-                    const user={email:email}
+                    const user={nombreUsuario:nombre}
                     const accesToken = generateAccesToken(user)
                     res.header('authorization', accesToken).json({
                         expiresIn: '300',
                         token: accesToken
                     })
-
                 }
                 else {
                     res.status(500).send("Usuario y/o contraseña incorrecta")

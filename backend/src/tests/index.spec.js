@@ -16,7 +16,7 @@ const usuarios = [
 ]
 const transacciones = [
     {
-        nombreUsuario: "Juan",
+        nombreUsuario: "Prueba",
         nombreMoneda: "BTC",
         cantidad: 5,
         precio: 10,
@@ -32,13 +32,25 @@ const transacciones = [
         fecha: "10-5-22",
     },
 ]
-
 describe('App', () => {
     test('should respond with 200 status code', async () => {
         const response = await api.get('/');
         expect(response.statusCode).toBe(200);
     }
     );
+    let token;
+    describe('Register & Login', () => {
+        test('register should respond with 200 status code', async () => {
+            await api.post('/register/').send(usuarios[0])
+                .expect(200)
+        })
+        test('login should respond with 200 status code', async () => {
+            response = await api.post('/login/').send(usuarios[0])
+            token = response._body.token
+            console.log(token)
+            expect(response.statusCode).toBe(200);
+        })})
+        
     describe('transactions', () => {
         test('get transacitions should respond with 200 status code and json', async () => {
             await api.get('/transactions')
@@ -50,34 +62,25 @@ describe('App', () => {
                 .expect(200)
         })
         test('delete transaction by username should respond with 200 status code and json', async () => {
-            await api.delete('/transactions/Juan')
+            await api.delete(`/transactions/${token}`)
                 .expect(200)
         })
         test('get transaction by username should respond with 200 status code and json', async () => {
-            await api.get('/transactions/Pepito')
+            await api.get(`/transactions/${token}`)
                 .expect(200)
                 .expect('Content-Type', /application\/json/)
         })
         test('put transaction by username should respond with 200 status code and json', async () => {
-            await api.put('/transactions/Pepito').send(transacciones[0])
+            await api.put(`/transactions/${token}`).send(transacciones[0])
                 .expect(200)
         })
     })
-    describe('login', () => {
-        test('register should respond with 200 status code', async () => {
-            await api.post('/register/').send(usuarios[0])
-                .expect(200)
-        })
-        test('login should respond with 200 status code', async () => {
-            await api.post('/login/').send(usuarios[0])
-                .expect(200)
-        })
 
+    describe('delete user', () => {
         test('login should respond with 200 status code', async () => {
             await api.delete('/dUser/').send(usuarios[0])
                 .expect(200)
         })
-
     })
     describe('prueba monedas', () => {
         test('register should respond with 200 status code', async () => {

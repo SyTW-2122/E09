@@ -1,3 +1,5 @@
+const jwt = require('jsonwebtoken')
+
 
 const TransactionsCtrl = {}
 
@@ -15,7 +17,8 @@ TransactionsCtrl.createTransaction = async (req, res) => {
     res.send(`This object was created:  ${newTransaction}`)
 }
 TransactionsCtrl.getTransaction = async (req, res) => {
-    const transactions = await Transaction.find({ "nombreUsuario": req.params.nombre})
+    nombreUsuario = procesarToken(req.params.token)
+    const transactions = await Transaction.find({ "nombreUsuario": nombreUsuario})
     const monedasBD = await Moneda.find({})
     let monedasDeUsuario = [];
     let comprasGenerales = 0;
@@ -68,11 +71,20 @@ TransactionsCtrl.getTransaction = async (req, res) => {
     res.json(respuesta)
 }
 TransactionsCtrl.updateTransaction = async (req, res) => {
-    const transaction = await Transaction.findOneAndUpdate({ "nombreUsuario": req.params.nombre }, req.body)
-    res.json(`Se ha actualizado el objeto con nombre: ${req.params.nombre}`)
+    nombre = procesarToken(req.params.token)
+    const transaction = await Transaction.findOneAndUpdate({ "nombreUsuario": nombre }, req.body)
+    res.json(`Se ha actualizado el objeto con nombre: ${nombre}`)
 }
 TransactionsCtrl.deleteTransaction = async (req, res) => {
-    const transaction = await Transaction.findOneAndDelete({ "nombreUsuario": req.params.nombre }, req.params.nombreUsuario)
+    nombre = procesarToken(req.params.token)
+    const transaction = await Transaction.findOneAndDelete({ "nombreUsuario": nombre })
     res.json(`Se ha eliminado el siguiente objeto: ${transaction}`)
 }
+
+function procesarToken(token) {
+    let decoded = jwt.decode(token, "claveSecreta", true)
+    return decoded.nombreUsuario
+}
+
 module.exports = TransactionsCtrl
+
