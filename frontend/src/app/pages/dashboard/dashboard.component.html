@@ -9,72 +9,152 @@
   </nav>
   <div class="container">
     <div class="row" id="titulo">
-      Título
+      <mat-toolbar><p><b style="font-size: 32px;">Portfolio personal</b></p> <div class="example-spacer"></div><button mat-raised-button color="primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Agregar moneda</button></mat-toolbar>
     </div>
-    <div class="row">
-      <div class="col-2">
-        <div class="row">
-          Cantidad actual
-        </div>
-        <div class="row">
-          Total invertido
-        </div>
-        <div class="row">
-          Beneficio/Pérdida
-        </div>
-        <div class="row">
-          Mejor moneda
-        </div>
-        <div class="row">
-          Peor moneda
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Agregar nueva moneda</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form class="row g-3">
+              <div class="col-md-6">
+                <div class="input-group form-outline">
+                  <input type="text" class="form-control" id="validationDefaultUsername" aria-describedby="inputGroupPrepend2" required />
+                  <label for="validationDefaultUsername" class="form-label">Nombre</label>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="input-group form-outline">
+                  <input type="text" class="form-control" id="validationDefaultUsername" aria-describedby="inputGroupPrepend2" required />
+                  <label for="validationDefaultUsername" class="form-label">Cantidad</label>
+                </div>
+              </div>
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <div class="input-group form-outline">
+                    <input type="text" class="form-control" id="validationDefaultUsername" aria-describedby="inputGroupPrepend2" required />
+                    <label for="validationDefaultUsername" class="form-label">Precio actual</label>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="input-group form-outline">
+                    <input type="text" class="form-control" id="validationDefaultUsername" aria-describedby="inputGroupPrepend2" required />
+                    <label for="validationDefaultUsername" class="form-label">Precio total</label>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12">
+                <button class="btn btn-primary" type="submit">Añadir moneda</button>
+              </div>
+            </form>
+          </div>
         </div>
       </div>
-      <div class="col-10">
-        <div class="row" id="espacio"> a</div>
-        <div class="row" id="monedas">
-          <div class="row" id="cabecera">
-            <div class="col">
-              <p><b>Nombre</b></p>
-            </div>
-            <div class="col">
-              <p><b>Inversión</b></p>
-            </div>
-            <div class="col">
-              <p><b>Cantidad</b></p>
-            </div>
-            <div class="col">
-              <p><b>Precio actual</b></p>
-            </div>
-            <div class="col">
-              <p><b>Precio de compra</b></p>
-            </div>
-            <div class="col">
-              <p><b>24h%</b></p>
-            </div>
-            <div class="col">
-              <p><b>7d%</b></p>
-            </div>
-            <div class="col">
-              <p><b>Desempeño</b></p>
-            </div>
-          </div>
-          <div class="row">
-            <div *ngFor="let tag; index as i">
-              <p *ngIf="-1 < 0" ><b>  </b></p>
-            </div>
-          </div>
+    </div>
+
+  
+    <div class="row">
+      <div class="col-4">
+        
+        <div class="row">
+          <mat-card class="example-card">
+            <mat-card-title style="text-align: center;">Cantidad actual ($)</mat-card-title>
+            <mat-card-content>
+              <p style="text-align: center;">$</p>
+            </mat-card-content>
+          </mat-card>
         </div>
-        <div class="row" id="espacio"> a</div>
-        <div class="row" id="monedas">
-          Bitcoin
+        <div class="row">
+          <mat-card class="example-card">
+            <mat-card-title style="text-align: center;">Total invertido ($)</mat-card-title>
+            <mat-card-content>
+              <p style="text-align: center;">$</p>
+            </mat-card-content>
+          </mat-card>
         </div>
-        <div class="row" id="espacio"> a</div>
-        <div class="row" id="monedas">
-          Bitcoin
+        <div class="row">
+          <mat-card class="example-card">
+            <mat-card-title style="text-align: center;">Beneficio/Pérdida ($)</mat-card-title>
+            <mat-card-content>
+              <p style="text-align: center;">$</p>
+            </mat-card-content>
+          </mat-card>
         </div>
-        <div class="row" id="espacio"> a</div>
-        <div class="row" id="monedas">
-          Bitcoin
+        <div class="row">
+          <mat-card class="example-card">
+            <mat-card-title style="text-align: center;">Mejor moneda</mat-card-title>
+            <mat-card-subtitle style="text-align: center;">Moneda de la cuál se han obtenido más beneficios o menos pérdidas</mat-card-subtitle>
+            <mat-card-content>
+              <p style="text-align: center;"></p>
+            </mat-card-content>
+          </mat-card>
+        </div>
+        <div class="row">
+          <mat-card class="example-card">
+            <mat-card-title style="text-align: center;">Peor moneda</mat-card-title>
+            <mat-card-subtitle style="text-align: center;">Moneda de la cuál se han obtenido más pérdidas o menos beneficios</mat-card-subtitle>
+            <mat-card-content>
+              <p style="text-align: center;"></p>
+            </mat-card-content>
+          </mat-card>
+        </div>
+      </div>
+      <div class="col-8">
+        <div class="mat-elevation-z8">
+          <table mat-table [dataSource]="dataSource" matSort>
+            <ng-container matColumnDef="nombre">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </th>
+              <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
+            </ng-container>
+            <ng-container matColumnDef="symbol">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Símbolo </th>
+              <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
+            </ng-container>
+            <ng-container matColumnDef="inversion">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Inversión </th>
+              <td mat-cell *matCellDef="let element"> {{element.inversion}} </td>
+            </ng-container>
+            <ng-container matColumnDef="cantidad">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Cantidad </th>
+              <td mat-cell *matCellDef="let element"> {{element.cantidad}}{{element.symbol}} </td>
+            </ng-container>
+            <ng-container matColumnDef="preciocompra">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Precio compra </th>
+              <td mat-cell *matCellDef="let element"> {{element.preciocompra}}$ </td>
+            </ng-container>
+            <ng-container matColumnDef="precioactual">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Precio actual</th>
+              <td mat-cell *matCellDef="let element"> {{element.precioactual}}$ </td>
+            </ng-container>
+            <ng-container matColumnDef="p24h">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> p24h% </th>
+              <td mat-cell *matCellDef="let element"> {{element.p24h.toFixed(3)}}% </td>
+            </ng-container>
+            <ng-container matColumnDef="p7d">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> p7d% </th>
+              <td mat-cell *matCellDef="let element"> {{element.p7d.toFixed(3)}}% </td>
+            </ng-container>
+            <ng-container matColumnDef="beneficio">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Desempeño </th>
+              <td mat-cell *matCellDef="let element"> {{element.beneficio }}% </td>
+            </ng-container>      
+            <ng-container matColumnDef="acciones">
+              <th mat-header-cell *matHeaderCellDef> </th>
+              <td mat-cell *matCellDef="let element" style="text-align: right;" > 
+                <a class="pointer" style="color: primary" matTooltip="Eliminar moneda" matTooltipPosition="right">
+                  <mat-icon>delete</mat-icon>
+                </a> 
+              </td>
+            </ng-container>   
+            
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>  
+          <mat-paginator [pageSize]="10" aria-label="Select page of users"></mat-paginator>
         </div>
       </div>
     </div>
