@@ -55,9 +55,15 @@ TransactionsCtrl.getTransaction = async (req, res) => {
             const precio_actual = monedasBD[index].precio
             let rendimiento = compras + ventas + precio_actual*cantidad
             let objeto = {
-                "nombreMoneda": transactionItem.nombreMoneda,
-                "rendimiento": rendimiento,
+                "nombre": transactionItem.nombreMoneda,
+                "symbol": transactionItem.symbol,
+                "inversion": compras,
                 "cantidad": cantidad,
+                "precioactual": precio_actual,
+                "preciocompra": (-compras)/cantidad,
+                "p24h": monedasBD[index].p24h,
+                "p7d": monedasBD[index].p7d,
+                "beneficios": rendimiento,
                 "porcentajeRendimiento": -(rendimiento/compras * 100)   //(((ventas + precio_actual * cantidad) / -compras)*100)- 100
             }
             console.log(objeto)

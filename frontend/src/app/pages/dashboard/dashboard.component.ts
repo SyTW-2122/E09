@@ -36,65 +36,21 @@ export class DashboardComponent implements OnInit {
 
   }
   ngOnInit(): void {
-    let token = localStorage.getItem("ACCESS_TOKEN")
-    let datos_Actuales: Monedas[];
-    this.monedasService.getMonedas().subscribe({
-      next: (res) => {
-        datos_Actuales = res;
-      },
-      error: (e) => {
-        console.log(e)
-      }
-    })
+    let token = localStorage.getItem("ACCESS_TOKEN");
     if (token != null) {
       this.transactionsService.getTransactions(token).subscribe({
         next: (res: any) => {
-          let tablita = res.transactionsResult
-          for (let i = 0; i < tablita.length; i++) {
-            let j = 0;
-            console.log("actuales",j)
-            while (tablita[i].nombreMoneda != datos_Actuales[j].nombre && j < 20) {
-              console.log("while")
-              
-              if (tablita[i].nombreMoneda == datos_Actuales[j].nombre) {
-                console.log("antes de meter", tablita[i])
-                tablita[i].precio = datos_Actuales[j].precio;
-                console.log("depues de meter", tablita[i])
-
-                tablita[i].p24h = datos_Actuales[j].p24h;
-                tablita[i].p7d = datos_Actuales[j].p7d;
-              }
-              j++;
-            }
-          }
-          //  Object { 0: {… }, 1: {… }, 2: {… }, 3: {… }, 4: {… }, 5: {… }, 6: {… }, 7: {… }, 8: {… }, 9: {… }, … }
-
-          //  0: Object { _id: "6308b9321c47a302076f8a4b", marketcap: 15296764266.77445, circulatingSupply: 34155827432.812, … }
-          //  1: Object { _id: "6308b9331c47a302076f8a4f", marketcap: 2031437378.5882697, circulatingSupply: 6898652211.267771, … }
-          //  2: Object { _id: "6308ba636ac79a302692f46f", marketcap: 3246407331.762678, circulatingSupply: 286370297, … }
-
-          //  comprasGenerales: 20650
-          //  transactionsResult: Array(3)[{… }, {… }, {… }]
-
-          // 0: Object { nombreMoneda: "Cardano", rendimiento: -105.21477470611788, cantidad: 100, … }
-          // 1: Object { nombreMoneda: "Bitcoin", rendimiento: 2669.3702953414595, cantidad: 0.5, … }
-          // 2: Object { nombreMoneda: "Shiba Inu", rendimiento: -450.00000000000006, cantidad: 0, … }
-          // length: 3
-
-
-          const result = Object.assign({}, res, datos_Actuales);
-          //console.log(result[0])
-          //console.log("RESULTADO FUNCIONA", result)
-          this.dataSource = new MatTableDataSource(tablita[1])
+          this.dataSource = new MatTableDataSource(res);
           this.dataSource.paginator = this.paginator;
           this.dataSource.sort = this.sort;
         },
-        error: (e: any) => {
+        error: (e) => {
           console.log(e)
         }
       })
     }
   }
+
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 }
