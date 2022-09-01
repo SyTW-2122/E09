@@ -17,7 +17,7 @@ export interface MonedasUser {
   precioactual: Number;
   p24h: Number;
   p7d: Number;
-  beneficio: Number;
+  porcentajeRendimiento: Number;
 }
 
 @Component({
@@ -29,7 +29,7 @@ export interface MonedasUser {
 
 export class DashboardComponent implements OnInit {
   listMonedas: MonedasUser[] = [];
-  displayedColumns: string[] = ['nombre', 'symbol', 'inversion', 'cantidad', 'preciocompra', 'precioactual', 'p24h', 'p7d', 'beneficio', 'acciones'];
+  displayedColumns: string[] = ['nombre', 'symbol', 'inversion', 'cantidad', 'preciocompra', 'precioactual', 'p24h', 'p7d', 'porcentajeRendimiento', 'acciones'];
   dataSource = new MatTableDataSource(this.listMonedas);
 
   constructor(private transactionsService: TransactionsService, private monedasService: MonedasService, private router: Router) {
@@ -50,6 +50,14 @@ export class DashboardComponent implements OnInit {
         }
       })
     }
+  }
+
+  format(numb: number) {
+    return Intl.NumberFormat('en-US').format(numb)
+  }
+
+  eliminar(){
+    console.log("cucu")
   }
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
