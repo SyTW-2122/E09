@@ -40,7 +40,8 @@ export class DashboardComponent implements OnInit {
     if (token != null) {
       this.transactionsService.getTransactions(token).subscribe({
         next: (res: any) => {
-          this.dataSource = new MatTableDataSource(res);
+          console.log(res)
+          this.dataSource = new MatTableDataSource(res.transactionsResult);
           this.dataSource.paginator = this.paginator;
           this.dataSource.sort = this.sort;
         },

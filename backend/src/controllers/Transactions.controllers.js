@@ -37,11 +37,13 @@ TransactionsCtrl.getTransaction = async (req, res) => {
             let cantidad = 0;
             let compras = 0;
             let ventas = 0;
+            let totalComprado = 0
             monedasDeUsuario.push(transactionItem.nombreMoneda)
             transactions.forEach(transactionToken =>  {
                 // Buscamos todas las transacciones con el nombre de la moneda en especifico
                 if (transactionItem.nombreMoneda == transactionToken.nombreMoneda) {
                     if (transactionToken.tipo == "compra") {// Calculamos las compras de esa moneda
+                        totalComprado += transactionToken.cantidad
                         compras -= transactionToken.cantidad * transactionToken.precio
                         cantidad += transactionToken.cantidad
                     } else { // Calculamos las ventas de esa moneda
@@ -56,11 +58,11 @@ TransactionsCtrl.getTransaction = async (req, res) => {
             let rendimiento = compras + ventas + precio_actual*cantidad
             let objeto = {
                 "nombre": transactionItem.nombreMoneda,
-                "symbol": transactionItem.symbol,
-                "inversion": compras,
+                "symbol": monedasBD[index].symbol,
+                "inversion": -compras,
                 "cantidad": cantidad,
                 "precioactual": precio_actual,
-                "preciocompra": (-compras)/cantidad,
+                "preciocompra": (-compras)/totalComprado,
                 "p24h": monedasBD[index].p24h,
                 "p7d": monedasBD[index].p7d,
                 "beneficios": rendimiento,
