@@ -31,14 +31,15 @@ export class DashboardComponent implements OnInit {
   listMonedas: MonedasUser[] = [];
   displayedColumns: string[] = ['nombre', 'symbol', 'inversion', 'cantidad', 'preciocompra', 'precioactual', 'p24h', 'p7d', 'porcentajeRendimiento', 'acciones'];
   dataSource = new MatTableDataSource(this.listMonedas);
+  token = localStorage.getItem("ACCESS_TOKEN");
+
 
   constructor(private transactionsService: TransactionsService, private monedasService: MonedasService, private router: Router) {
 
   }
   ngOnInit(): void {
-    let token = localStorage.getItem("ACCESS_TOKEN");
-    if (token != null) {
-      this.transactionsService.getTransactions(token).subscribe({
+    if (this.token != null) {
+      this.transactionsService.getTransactions(this.token).subscribe({
         next: (res: any) => {
           console.log(res)
           this.dataSource = new MatTableDataSource(res.transactionsResult);
@@ -56,8 +57,19 @@ export class DashboardComponent implements OnInit {
     return Intl.NumberFormat('en-US').format(numb)
   }
 
-  eliminar(){
-    console.log("cucu")
+  eliminar(moneda: MonedasUser){
+    console.log(moneda)
+    if (this.token != null) {
+      this.transactionsService.deleteTransaction(this.token, moneda.nombre.toString()).subscribe({
+        next: (res: any) => {
+          console.log(res)
+        },
+        error: (e: any) => {
+          console.log(e)
+        }
+      })
+    }
+
   }
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;

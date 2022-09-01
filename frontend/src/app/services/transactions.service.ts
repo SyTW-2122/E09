@@ -19,8 +19,8 @@ export class TransactionsService {
 
   }
 
-  deleteTransaction(){
-
+  deleteTransaction(token :string, moneda :string){
+    return this.http.delete(this.URL_API + '/' + token + '/' + moneda)
   }
 
   updateTransaction() {
