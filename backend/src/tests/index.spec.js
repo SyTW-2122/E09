@@ -16,8 +16,7 @@ const usuarios = [
 ]
 const transacciones = [
     {
-        nombreUsuario: "Prueba",
-        nombreMoneda: "BTC",
+        nombreMoneda: "Bitcoin",
         cantidad: 5,
         precio: 10,
         tipo: "compra",
@@ -58,11 +57,12 @@ describe('App', () => {
                 .expect('Content-Type', /application\/json/)
         })
         test('post transaction should respond with 200 status code', async () => {
-            await api.post('/transactions').send(transacciones[0])
+            response2 = await api.post(`/transactions/${token}`).send(transacciones[0])
                 .expect(200)
+            id = response2._body._id
         })
         test('delete transaction by username should respond with 200 status code and json', async () => {
-            await api.delete(`/transactions/${token}`)
+            await api.delete(`/transactions/${token}/Bitcoin`)
                 .expect(200)
         })
         test('get transaction by username should respond with 200 status code and json', async () => {
@@ -71,7 +71,7 @@ describe('App', () => {
                 .expect('Content-Type', /application\/json/)
         })
         test('put transaction by username should respond with 200 status code and json', async () => {
-            await api.put(`/transactions/${token}`).send(transacciones[0])
+            await api.put(`/transactions/${token}/${id}`).send(transacciones[0])
                 .expect(200)
         })
     })

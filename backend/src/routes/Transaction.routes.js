@@ -6,13 +6,13 @@ const TransactionsCtrl = require('../controllers/Transactions.controllers.js')
 //create a route for the root path
 router.get('/transactions', TransactionsCtrl.getTransactions)
 
-router.post('/transactions', TransactionsCtrl.createTransaction)
+router.post('/transactions/:token', TransactionsCtrl.createTransaction)
 
 router.get('/transactions/:token', TransactionsCtrl.getTransaction)
 
-router.put('/transactions/:token', TransactionsCtrl.updateTransaction)
+router.put('/transactions/:token/:id', TransactionsCtrl.updateTransaction)
 
-router.delete('/transactions/:token', TransactionsCtrl.deleteTransaction)
+router.delete('/transactions/:token/:moneda', TransactionsCtrl.deleteTransaction)
 
 
 module.exports = router

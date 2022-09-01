@@ -3,7 +3,6 @@ const jwt = require('jsonwebtoken')
 
 const TransactionsCtrl = {}
 
-const { ConnectionClosedEvent } = require('mongodb')
 const Transaction = require('../models/transaccion')
 const Moneda = require('../models/moneda')
 
@@ -12,9 +11,12 @@ TransactionsCtrl.getTransactions = async (req, res) => {
     res.json(transactions)
 }
 TransactionsCtrl.createTransaction = async (req, res) => {
-    const newTransaction = new Transaction(req.body)
+    nombre = procesarToken(req.params.token)
+    transaccion = req.body
+    transaccion.nombreUsuario = nombre
+    const newTransaction = new Transaction(transaccion)
     await newTransaction.save()
-    res.send(`This object was created:  ${newTransaction}`)
+    res.json(newTransaction)
 }
 TransactionsCtrl.getTransaction = async (req, res) => {
     nombreUsuario = procesarToken(req.params.token)
@@ -49,7 +51,7 @@ TransactionsCtrl.getTransaction = async (req, res) => {
                     // creamos el JSON con los datos que contendra nuestra respuesta
                 }
             }) //cierre for moneda individual
-            index = monedasBD.findIndex(element => element.symbol == transactionItem.nombreMoneda)
+            index = monedasBD.findIndex(element => element.nombre == transactionItem.nombreMoneda)
             const precio_actual = monedasBD[index].precio
             let rendimiento = compras + ventas + precio_actual*cantidad
             let objeto = {
@@ -72,12 +74,14 @@ TransactionsCtrl.getTransaction = async (req, res) => {
 }
 TransactionsCtrl.updateTransaction = async (req, res) => {
     nombre = procesarToken(req.params.token)
-    const transaction = await Transaction.findOneAndUpdate({ "nombreUsuario": nombre }, req.body)
+    id = req.params.id
+    const transaction = await Transaction.findByIdAndUpdate(id, req.body)
     res.json(`Se ha actualizado el objeto con nombre: ${nombre}`)
 }
 TransactionsCtrl.deleteTransaction = async (req, res) => {
     nombre = procesarToken(req.params.token)
-    const transaction = await Transaction.findOneAndDelete({ "nombreUsuario": nombre })
+    moneda = req.params.moneda
+    const transaction = await Transaction.deleteMany({ "nombreUsuario": nombre, "nombreMoneda": moneda })
     res.json(`Se ha eliminado el siguiente objeto: ${transaction}`)
 }
 
