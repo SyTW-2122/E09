@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MonedasService } from 'src/app/services/monedas.service';
 import { MatPaginator } from '@angular/material/paginator';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
 import { Router } from '@angular/router';
 import { TransactionsService } from 'src/app/services/transactions.service';
@@ -36,7 +37,7 @@ export class DashboardComponent implements OnInit {
   token = localStorage.getItem("ACCESS_TOKEN");
   form: FormGroup;
 
-  constructor(private fb: FormBuilder, private transactionsService: TransactionsService, private monedasService: MonedasService, private router: Router) {
+  constructor(private fb: FormBuilder, private transactionsService: TransactionsService, private _snackBar: MatSnackBar, private monedasService: MonedasService, private router: Router) {
     this.form = this.fb.group({
       nombre: ['', Validators.required],
       cantidad: ['', Validators.required],
@@ -105,6 +106,7 @@ export class DashboardComponent implements OnInit {
       },
       error: (e: any) => {
         console.log(e)
+        this.msg(e.error)
       }
     })
   }
@@ -124,6 +126,14 @@ export class DashboardComponent implements OnInit {
         }
       })
     }
+  }
+
+  msg(err :string) {
+    this._snackBar.open(err,'', {
+      duration: 5000,
+      horizontalPosition: 'center',
+      verticalPosition: 'bottom'
+    });
   }
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;

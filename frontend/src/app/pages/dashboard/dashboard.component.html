@@ -62,7 +62,7 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-4">
+      <div class="col-3">
         <div class="row">
           <mat-card class="example-card" >
             <mat-card-title style="text-align: center;">Cantidad actual ($)</mat-card-title>
@@ -106,7 +106,7 @@
           </mat-card>
         </div>
       </div>
-      <div class="col-8">
+      <div class="col-9">
         <div class="mat-elevation-z8">
           <table mat-table [dataSource]="dataSource" matSort>
             <ng-container matColumnDef="nombre">
@@ -170,8 +170,68 @@
         </div>
       </div>
     </div>
-    <div class="row">
-      
+    <div class="row" id="historial">
+      <div class="mat-elevation-z8">
+        <table mat-table [dataSource]="dataSource" matSort>
+          <ng-container matColumnDef="nombre">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </th>
+            <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
+          </ng-container>
+          <ng-container matColumnDef="symbol">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Símbolo </th>
+            <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
+          </ng-container>
+          <ng-container matColumnDef="inversion">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Inversión </th>
+            <td mat-cell *matCellDef="let element"> ${{format(element.inversion.toFixed(3))}} </td>
+          </ng-container>
+          <ng-container matColumnDef="cantidad">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Cantidad </th>
+            <td mat-cell *matCellDef="let element"> {{element.cantidad}}</td>
+          </ng-container>
+          <ng-container matColumnDef="preciocompra">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Precio compra </th>
+            <td mat-cell *matCellDef="let element"> ${{format(element.preciocompra.toFixed(3))}} </td>
+          </ng-container>
+          <ng-container matColumnDef="precioactual">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Precio actual</th>
+            <td mat-cell *matCellDef="let element"> ${{format(element.precioactual.toFixed(3))}} </td>
+          </ng-container>
+          <ng-container matColumnDef="p24h">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> p24h% </th>
+            <td mat-cell *matCellDef="let element">
+              <span *ngIf="element.p24h >= 0" class="positive bold">{{element.p24h.toFixed(3) }}%</span>
+              <span *ngIf="element.p24h < 0" class="negative bold">{{element.p24h.toFixed(3) }}%</span>
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="p7d">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> p7d% </th>
+            <td mat-cell *matCellDef="let element"> 
+              <span *ngIf="element.p7d >= 0" class="positive bold">{{element.p7d.toFixed(3) }}%</span>
+              <span *ngIf="element.p7d < 0" class="negative bold">{{element.p7d.toFixed(3) }}%</span>
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="porcentajeRendimiento">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Desempeño </th>
+            <td mat-cell *matCellDef="let element"> 
+              <span *ngIf="element.porcentajeRendimiento >= 0" class="positive bold">{{element.porcentajeRendimiento.toFixed(3) }}%</span>
+              <span *ngIf="element.porcentajeRendimiento < 0" class="negative bold">{{element.porcentajeRendimiento.toFixed(3) }}%</span>
+            </td>
+          </ng-container>      
+          <ng-container matColumnDef="acciones">
+            <th mat-header-cell *matHeaderCellDef> </th>
+            <td mat-cell *matCellDef="let element" style="text-align: right;" > 
+              <a (click)="eliminar(element)" class="pointer" style="color: primary" matTooltip="Eliminar moneda" matTooltipPosition="right">
+                <mat-icon>delete</mat-icon>
+              </a> 
+            </td>
+          </ng-container>   
+          
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>  
+        <mat-paginator [pageSize]="10" aria-label="Select page of users"></mat-paginator>
+      </div>
     </div>
   </div>
 </body>
