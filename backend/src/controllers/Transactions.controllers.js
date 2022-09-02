@@ -10,17 +10,35 @@ TransactionsCtrl.getTransactions = async (req, res) => {
     const transactions = await Transaction.find()
     res.json(transactions)
 }
+
 TransactionsCtrl.createTransaction = async (req, res) => {
-    nombre = procesarToken(req.params.token)
-    transaccion = req.body
+    let nombre = procesarToken(req.params.token)
+    let transaccion = req.body
+    let nombreMoneda = req.body.nombreMoneda
     transaccion.nombreUsuario = nombre
+    const transactionsMoneda = await Transaction.find({ "nombreUsuario": nombre, "nombreMoneda": nombreMoneda })
+    let cantidad = 0
+    if (req.body.tipo = "venta") {
+        transactionsMoneda.forEach(async transactionItem => {
+            if (transactionItem.tipo = compra) {
+                cantida += transactionItem.cantidad
+            } else {
+                cantida -= transactionItem.cantidad
+            }
+        })
+        if (cantidad - req.body.cantidad < 0) {
+            res.status(400).send("No se pueden tener valores negativos en la cantidad de monedas que posee.")
+            return
+        }
+    } 
     const newTransaction = new Transaction(transaccion)
     await newTransaction.save()
     res.json(newTransaction)
 }
+
 TransactionsCtrl.getTransaction = async (req, res) => {
     nombreUsuario = procesarToken(req.params.token)
-    const transactions = await Transaction.find({ "nombreUsuario": nombreUsuario})
+    const transactions = await Transaction.find({ "nombreUsuario": nombreUsuario })
     const monedasBD = await Moneda.find({})
     let monedasDeUsuario = [];
     let comprasGenerales = 0;
@@ -33,13 +51,13 @@ TransactionsCtrl.getTransaction = async (req, res) => {
             ventasGenerales += transactionItem.cantidad * transactionItem.precio
         }
         // Comprueba si la moneda ya ha sido calculada       
-          if (!monedasDeUsuario.includes(transactionItem.nombreMoneda)) {
+        if (!monedasDeUsuario.includes(transactionItem.nombreMoneda)) {
             let cantidad = 0;
             let compras = 0;
             let ventas = 0;
             let totalComprado = 0
             monedasDeUsuario.push(transactionItem.nombreMoneda)
-            transactions.forEach(transactionToken =>  {
+            transactions.forEach(transactionToken => {
                 // Buscamos todas las transacciones con el nombre de la moneda en especifico
                 if (transactionItem.nombreMoneda == transactionToken.nombreMoneda) {
                     if (transactionToken.tipo == "compra") {// Calculamos las compras de esa moneda
@@ -55,18 +73,18 @@ TransactionsCtrl.getTransaction = async (req, res) => {
             }) //cierre for moneda individual
             index = monedasBD.findIndex(element => element.nombre == transactionItem.nombreMoneda)
             const precio_actual = monedasBD[index].precio
-            let rendimiento = compras + ventas + precio_actual*cantidad
+            let rendimiento = compras + ventas + precio_actual * cantidad
             let objeto = {
                 "nombre": transactionItem.nombreMoneda,
                 "symbol": monedasBD[index].symbol,
                 "inversion": -compras,
                 "cantidad": cantidad,
                 "precioactual": precio_actual,
-                "preciocompra": (-compras)/totalComprado,
+                "preciocompra": (-compras) / totalComprado,
                 "p24h": monedasBD[index].p24h,
                 "p7d": monedasBD[index].p7d,
                 "beneficios": rendimiento,
-                "porcentajeRendimiento": -(rendimiento/compras * 100)   //(((ventas + precio_actual * cantidad) / -compras)*100)- 100
+                "porcentajeRendimiento": -(rendimiento / compras * 100)   //(((ventas + precio_actual * cantidad) / -compras)*100)- 100
             }
             //console.log(objeto)
             if (cantidad > 0) {
@@ -76,9 +94,9 @@ TransactionsCtrl.getTransaction = async (req, res) => {
     })
     /**Rendimiento de cada moneda */
     let respuesta = {
-        "comprasGenerales":comprasGenerales,
-        "ventasGenerales":ventasGenerales,
-        "transactionsResult":transactionsResult
+        "comprasGenerales": comprasGenerales,
+        "ventasGenerales": ventasGenerales,
+        "transactionsResult": transactionsResult
     }
     res.json(respuesta)
 }

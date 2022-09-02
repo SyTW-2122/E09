@@ -101,6 +101,7 @@ export class DashboardComponent implements OnInit {
     if (this.token != null) this.transactionsService.postTransaction(this.token, nuevaTransaccion).subscribe({
       next: (res: any) => {
         console.log(res)
+        location.reload()
       },
       error: (e: any) => {
         console.log(e)
