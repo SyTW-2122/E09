@@ -21,9 +21,9 @@ TransactionsCtrl.createTransaction = async (req, res) => {
     if (req.body.tipo = "venta") {
         transactionsMoneda.forEach(async transactionItem => {
             if (transactionItem.tipo = "compra") {
-                cantida += transactionItem.cantidad
+                cantidad += transactionItem.cantidad
             } else {
-                cantida -= transactionItem.cantidad
+                cantidad -= transactionItem.cantidad
             }
         })
         if (cantidad - req.body.cantidad < 0) {
