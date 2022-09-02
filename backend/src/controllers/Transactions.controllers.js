@@ -18,9 +18,9 @@ TransactionsCtrl.createTransaction = async (req, res) => {
     transaccion.nombreUsuario = nombre
     const transactionsMoneda = await Transaction.find({ "nombreUsuario": nombre, "nombreMoneda": nombreMoneda })
     let cantidad = 0
-    if (req.body.tipo = "venta") {
+    if (req.body.tipo == "venta") {
         transactionsMoneda.forEach(async transactionItem => {
-            if (transactionItem.tipo = "compra") {
+            if (transactionItem.tipo == "compra") {
                 cantidad += transactionItem.cantidad
             } else {
                 cantidad -= transactionItem.cantidad
