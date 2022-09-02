@@ -68,8 +68,10 @@ TransactionsCtrl.getTransaction = async (req, res) => {
                 "beneficios": rendimiento,
                 "porcentajeRendimiento": -(rendimiento/compras * 100)   //(((ventas + precio_actual * cantidad) / -compras)*100)- 100
             }
-            console.log(objeto)
-            transactionsResult.push(objeto)
+            //console.log(objeto)
+            if (cantidad > 0) {
+                transactionsResult.push(objeto)
+            }
         }
     })
     /**Rendimiento de cada moneda */
