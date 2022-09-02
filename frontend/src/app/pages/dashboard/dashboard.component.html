@@ -20,35 +20,27 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            <form class="row g-3">
-              <div class="col-md-6">
-                <div class="input-group form-outline">
-                  <input type="text" class="form-control" id="validationDefaultUsername" aria-describedby="inputGroupPrepend2" required />
-                  <label for="validationDefaultUsername" class="form-label">Nombre</label>
-                </div>
+            <form class="row g-3" (ngSubmit)="agregar()">
+              <div class="form-check col-md-6">
+                <select class="form-select" aria-label="Default select example">
+                  <option selected >Selecciona la moneda</option>
+                  <option *ngFor="let nombre of datosM; index as i">{{nombre}}</option>
+                </select>
               </div>
-              <div class="col-md-6">
+              <div class="form-check col-md-6">
                 <div class="input-group form-outline">
-                  <input type="text" class="form-control" id="validationDefaultUsername" aria-describedby="inputGroupPrepend2" required />
-                  <label for="validationDefaultUsername" class="form-label">Cantidad</label>
+                  <input class="form-control" placeholder="Cantidad">
                 </div>
               </div>
               <div class="row g-3">
-                <div class="col-md-6">
+                <div class="form-check col-md-6">
                   <div class="input-group form-outline">
-                    <input type="text" class="form-control" id="validationDefaultUsername" aria-describedby="inputGroupPrepend2" required />
-                    <label for="validationDefaultUsername" class="form-label">Precio actual</label>
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="input-group form-outline">
-                    <input type="text" class="form-control" id="validationDefaultUsername" aria-describedby="inputGroupPrepend2" required />
-                    <label for="validationDefaultUsername" class="form-label">Precio total</label>
+                    <input class="form-control" placeholder="Precio actual">
                   </div>
                 </div>
               </div>
               <div class="col-12">
-                <button class="btn btn-primary" type="submit">Añadir moneda</button>
+                <button type="submit" class="btn btn-primary" [disabled]="form.invalid">Añadir moneda</button>
               </div>
             </form>
           </div>

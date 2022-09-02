@@ -15,7 +15,7 @@ export class TransactionsService {
     return this.http.get(this.URL_API + '/' + token)
   }
 
-  postTransaction() {
+  postTransaction(token: string) {
 
   }
 
