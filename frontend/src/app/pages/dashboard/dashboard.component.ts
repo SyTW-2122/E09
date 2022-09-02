@@ -40,7 +40,9 @@ export class DashboardComponent implements OnInit {
     this.form = this.fb.group({
       nombre: ['', Validators.required],
       cantidad: ['', Validators.required],
-      precio_actual: ['', Validators.required]
+      precio_actual: ['', Validators.required],
+      tipo: ['', Validators.required],
+      fecha: ['', Validators.required]
     })
   }
   ngOnInit(): void {
@@ -58,7 +60,6 @@ export class DashboardComponent implements OnInit {
       })
     }
     this.datosMoneda()
-    
   }
 
   datosMoneda() {
@@ -86,17 +87,25 @@ export class DashboardComponent implements OnInit {
   agregar() {
     const nombre = this.form.value.nombre;
     const cantidad = this.form.value.cantidad;
-    const precio = this.form.value.precio;
+    const precio_actual = this.form.value.precio_actual;
+    const tipo = this.form.value.tipo;
+    const fecha = this.form.value.fecha;
 
     let nuevaTransaccion = {
-      "nombre": nombre,
+      "nombreMoneda": nombre,
       "cantidad": cantidad,
-      "precio": precio,
-      "tipo": "tipo",
-      "fecha": "fecha"
+      "precio": precio_actual,
+      "tipo": tipo.toLowerCase(),
+      "fecha": fecha
     }
-
-    this.transactionsService.postTransaction(token)
+    if (this.token != null) this.transactionsService.postTransaction(this.token, nuevaTransaccion).subscribe({
+      next: (res: any) => {
+        console.log(res)
+      },
+      error: (e: any) => {
+        console.log(e)
+      }
+    })
   }
 
   actualizar() {

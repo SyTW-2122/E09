@@ -9,7 +9,7 @@
   </nav>
   <div class="container">
     <div class="row" id="titulo">
-      <mat-toolbar><p><b style="font-size: 32px;">Portfolio personal</b></p> <div class="example-spacer"></div><button mat-raised-button color="primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Agregar moneda</button></mat-toolbar>
+      <mat-toolbar><p><b style="font-size: 32px;">Portfolio personal</b></p> <div class="example-spacer"></div><button mat-raised-button color="primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Agregar transacción</button></mat-toolbar>
     </div>
 
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -20,25 +20,39 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            <form class="row g-3" (ngSubmit)="agregar()">
+            <form class="row g-3" [formGroup]="form" (ngSubmit)="agregar()">
               <div class="form-check col-md-6">
-                <select class="form-select" aria-label="Default select example">
+                <select class="form-select" aria-label="Default select example" formControlName="nombre">
                   <option selected >Selecciona la moneda</option>
                   <option *ngFor="let nombre of datosM; index as i">{{nombre}}</option>
                 </select>
               </div>
               <div class="form-check col-md-6">
                 <div class="input-group form-outline">
-                  <input class="form-control" placeholder="Cantidad">
+                  <input class="form-control" placeholder="Cantidad" formControlName="cantidad">
                 </div>
               </div>
               <div class="row g-3">
                 <div class="form-check col-md-6">
                   <div class="input-group form-outline">
-                    <input class="form-control" placeholder="Precio actual">
+                    <input class="form-control" placeholder="Precio actual" formControlName="precio_actual">
+                  </div>
+                </div>
+                <div class="form-check col-md-6">
+                  <div class="input-group form-outline">
+                    <input type="date" class="form-control" placeholder="" formControlName="fecha">
                   </div>
                 </div>
               </div>
+              <div class="row g-3">
+                <div class="form-check col-md-6">
+                  <select class="form-select" aria-label="Default select example" formControlName="tipo">
+                    <option value="compra">Compra</option>
+                    <option value="venta">Venta</option>
+                  </select>
+                </div>
+              </div>
+              
               <div class="col-12">
                 <button type="submit" class="btn btn-primary" [disabled]="form.invalid">Añadir moneda</button>
               </div>
