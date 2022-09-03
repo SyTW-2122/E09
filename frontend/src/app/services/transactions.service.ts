@@ -15,7 +15,7 @@ export class TransactionsService {
     return this.http.get(this.URL_API + '/' + token)
   }
 
-  getTransaction(token: string) {
+  getTransactionHistory(token: string) {
     return this.http.get(this.URL_API + '/history/' + token)
   }
 

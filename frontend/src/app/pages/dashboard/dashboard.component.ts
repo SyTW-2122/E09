@@ -33,7 +33,7 @@ export class DashboardComponent implements OnInit {
   datosM: any = [];
   //listMonedas: MonedasUser[] = [];
   displayedColumns: string[] = ['nombre', 'symbol', 'inversion', 'cantidad', 'preciocompra', 'precioactual', 'p24h', 'beneficios', 'porcentajeRendimiento', 'acciones'];
-  displayedColumns2: string[] = ['nombre', 'symbol', 'cantidad', 'preciocompra', 'fecha'];
+  displayedColumns2: string[] = ['nombreMoneda', 'cantidad', 'precio', 'tipo', 'fecha'];
   dataSource = new MatTableDataSource();
   dataSource2 = new MatTableDataSource();
   token = localStorage.getItem("ACCESS_TOKEN");
@@ -73,18 +73,13 @@ export class DashboardComponent implements OnInit {
         }
       })
 
-      this.transactionsService.getTransactions(this.token).subscribe({
+      this.transactionsService.getTransactionHistory(this.token).subscribe({
         next: (res2: any) => {
           console.log(res2)
-          this.comprasGenerales = res2.comprasGenerales
-          this.cantidadActual = res2.cantidadActual
-          this.beneficio= res2.beneficio
-          this.mejorMoneda=res2.mejorMoneda
-          this.peorMoneda=res2.peorMoneda
-          this.fecha=res2.fecha
-          this.dataSource2 = new MatTableDataSource(res2.transactionsResult);
-          this.dataSource2.paginator = this.paginator;
-          this.dataSource2.sort = this.sort;
+          //res2.fecha = res2.fecha.getDay();
+          this.dataSource2 = new MatTableDataSource(res2);
+          this.dataSource2.paginator = this.paginator2;
+          this.dataSource2.sort = this.sort2;
         },
         error: (e) => {
           console.log(e)
@@ -193,4 +188,7 @@ export class DashboardComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
+
+  @ViewChild(MatPaginator) paginator2!: MatPaginator;
+  @ViewChild(MatSort) sort2!: MatSort;
 }
