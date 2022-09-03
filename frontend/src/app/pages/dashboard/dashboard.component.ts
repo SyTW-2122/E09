@@ -33,7 +33,7 @@ export class DashboardComponent implements OnInit {
   datosM: any = [];
   //listMonedas: MonedasUser[] = [];
   displayedColumns: string[] = ['nombre', 'symbol', 'inversion', 'cantidad', 'preciocompra', 'precioactual', 'p24h', 'beneficios', 'porcentajeRendimiento', 'acciones'];
-  displayedColumns2: string[] = ['nombreMoneda', 'cantidad', 'precio', 'tipo', 'fecha'];
+  displayedColumns2: string[] = ['nombreMoneda', 'cantidad', 'precio', 'tipo', 'fecha', 'acciones'];
   dataSource = new MatTableDataSource();
   dataSource2 = new MatTableDataSource();
   token = localStorage.getItem("ACCESS_TOKEN");
@@ -45,6 +45,7 @@ export class DashboardComponent implements OnInit {
   mejorMoneda: number[] = [];
   peorMoneda: number[] = [];
   fecha!: string;
+  id_transaccionEditar!:string;
   constructor(private fb: FormBuilder, private transactionsService: TransactionsService, private _snackBar: MatSnackBar, private monedasService: MonedasService, private router: Router) {
     this.form = this.fb.group({
       nombre: ['', Validators.required],
@@ -140,7 +141,6 @@ export class DashboardComponent implements OnInit {
 
   actualizar() {
     const nombre = this.form.value.nombre;
-    const id = this.form.value.id;
     const cantidad = this.form.value.cantidad;
     const precio_actual = this.form.value.precio_actual;
     const tipo = this.form.value.tipo;
@@ -154,9 +154,10 @@ export class DashboardComponent implements OnInit {
       "fecha": fecha
     }
     if (this.token != null) {
-      this.transactionsService.updateTransaction(this.token,id,nuevaTransaccion ).subscribe({
+      this.transactionsService.updateTransaction(this.token,this.id_transaccionEditar,nuevaTransaccion ).subscribe({
         next: (res: any) => {
           console.log(res)
+          location.reload()
         },
         error: (e: any) => {
           console.log(e)
@@ -184,6 +185,10 @@ export class DashboardComponent implements OnInit {
       horizontalPosition: 'center',
       verticalPosition: 'bottom'
     });
+  }
+
+  guardarId(element: any) {
+    this.id_transaccionEditar = element._id
   }
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
