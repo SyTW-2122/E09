@@ -33,7 +33,7 @@ export class DashboardComponent implements OnInit {
   datosM: any = [];
   //listMonedas: MonedasUser[] = [];
   displayedColumns: string[] = ['nombre', 'symbol', 'inversion', 'cantidad', 'preciocompra', 'precioactual', 'p24h', 'beneficios', 'porcentajeRendimiento', 'acciones'];
-  displayedColumns2: string[] = ['nombre', 'symbol', 'cantidad', 'preciocompra', 'precioactual', 'p24h', 'beneficios', 'porcentajeRendimiento', 'fecha'];
+  displayedColumns2: string[] = ['nombre', 'symbol', 'cantidad', 'preciocompra', 'fecha'];
   dataSource = new MatTableDataSource();
   dataSource2 = new MatTableDataSource();
   token = localStorage.getItem("ACCESS_TOKEN");
@@ -42,8 +42,8 @@ export class DashboardComponent implements OnInit {
   totalInvertido!: number;
   cantidadActual!: number;
   beneficio!: number;
-  mejorMoneda!: number[];
-  peorMoneda!: number[];
+  mejorMoneda: number[] = [];
+  peorMoneda: number[] = [];
   fecha!: string;
   constructor(private fb: FormBuilder, private transactionsService: TransactionsService, private _snackBar: MatSnackBar, private monedasService: MonedasService, private router: Router) {
     this.form = this.fb.group({
@@ -144,10 +144,33 @@ export class DashboardComponent implements OnInit {
   }
 
   actualizar() {
+    const nombre = this.form.value.nombre;
+    const id = this.form.value.id;
+    const cantidad = this.form.value.cantidad;
+    const precio_actual = this.form.value.precio_actual;
+    const tipo = this.form.value.tipo;
+    const fecha = this.form.value.fecha;
+    
+    let nuevaTransaccion = {
+      "nombreMoneda": nombre,
+      "cantidad": cantidad,
+      "precio": precio_actual,
+      "tipo": tipo.toLowerCase(),
+      "fecha": fecha
+    }
+    if (this.token != null) {
+      this.transactionsService.updateTransaction(this.token,id,nuevaTransaccion ).subscribe({
+        next: (res: any) => {
+          console.log(res)
+        },
+        error: (e: any) => {
+          console.log(e)
+        }
+      })
+    }
   }
 
   eliminar(moneda: MonedasUser){
-    console.log(moneda)
     if (this.token != null) {
       this.transactionsService.deleteTransaction(this.token, moneda.nombre.toString()).subscribe({
         next: (res: any) => {

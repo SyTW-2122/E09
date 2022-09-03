@@ -52,7 +52,7 @@ describe('App', () => {
         
     describe('transactions', () => {
         test('get transacitions should respond with 200 status code and json', async () => {
-            await api.get('/transactions')
+            await api.get(`/transactions/history/${token}`)
                 .expect(200)
                 .expect('Content-Type', /application\/json/)
         })

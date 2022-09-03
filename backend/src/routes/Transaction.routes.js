@@ -4,7 +4,7 @@ const router = Router()
 const TransactionsCtrl = require('../controllers/Transactions.controllers.js') 
 
 //create a route for the root path
-router.get('/transactions', TransactionsCtrl.getTransactions)
+router.get('/transactions/history/:token', TransactionsCtrl.getTransactions)
 
 router.post('/transactions/:token', TransactionsCtrl.createTransaction)
 

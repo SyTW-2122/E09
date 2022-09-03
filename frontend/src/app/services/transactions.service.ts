@@ -15,6 +15,10 @@ export class TransactionsService {
     return this.http.get(this.URL_API + '/' + token)
   }
 
+  getTransaction(token: string) {
+    return this.http.get(this.URL_API + '/history/' + token)
+  }
+
   postTransaction(token: string, body: Object) {
     return this.http.post(this.URL_API + '/' + token, body)
   }
@@ -23,7 +27,7 @@ export class TransactionsService {
     return this.http.delete(this.URL_API + '/' + token + '/' + moneda)
   }
 
-  updateTransaction() {
-
+  updateTransaction(token: string,id: string, body: Object) {
+    return this.http.put(this.URL_API + '/' + token + '/' + id, body)
   }
 }

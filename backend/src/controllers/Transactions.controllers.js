@@ -7,7 +7,8 @@ const Transaction = require('../models/transaccion')
 const Moneda = require('../models/moneda')
 
 TransactionsCtrl.getTransactions = async (req, res) => {
-    const transactions = await Transaction.find()
+    let nombre = procesarToken(req.params.token)
+    const transactions = await Transaction.find({ "nombreUsuario": nombre})
     res.json(transactions)
 }
 
