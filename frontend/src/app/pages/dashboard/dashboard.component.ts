@@ -32,14 +32,16 @@ export interface MonedasUser {
 export class DashboardComponent implements OnInit {
   datosM: any = [];
   //listMonedas: MonedasUser[] = [];
-  displayedColumns: string[] = ['nombre', 'symbol', 'inversion', 'cantidad', 'preciocompra', 'precioactual', 'p24h', 'p7d', 'porcentajeRendimiento', 'acciones'];
+  displayedColumns: string[] = ['nombre', 'symbol', 'inversion', 'cantidad', 'preciocompra', 'precioactual', 'p24h', 'beneficios', 'porcentajeRendimiento', 'acciones'];
   dataSource = new MatTableDataSource();
   token = localStorage.getItem("ACCESS_TOKEN");
   form: FormGroup;
   comprasGenerales!: number;
   totalInvertido!: number;
   cantidadActual!: number;
-
+  beneficio!: number;
+  mejorMoneda!: number[];
+  peorMoneda!: number[];
   constructor(private fb: FormBuilder, private transactionsService: TransactionsService, private _snackBar: MatSnackBar, private monedasService: MonedasService, private router: Router) {
     this.form = this.fb.group({
       nombre: ['', Validators.required],
@@ -56,6 +58,9 @@ export class DashboardComponent implements OnInit {
           console.log(res)
           this.comprasGenerales = res.comprasGenerales
           this.cantidadActual = res.cantidadActual
+          this.beneficio= res.beneficio
+          this.mejorMoneda=res.mejorMoneda
+          this.peorMoneda=res.peorMoneda
           this.dataSource = new MatTableDataSource(res.transactionsResult);
           this.dataSource.paginator = this.paginator;
           this.dataSource.sort = this.sort;
