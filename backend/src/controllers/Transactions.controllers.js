@@ -44,6 +44,8 @@ TransactionsCtrl.getTransaction = async (req, res) => {
     let comprasGenerales = 0;
     let ventasGenerales = 0;
     let transactionsResult = []
+    let cantidadActual=0;
+
     transactions.forEach(async transactionItem => {
         if (transactionItem.tipo == "compra") { // Suma cantidades que has comprado
             comprasGenerales += transactionItem.cantidad * transactionItem.precio
@@ -56,7 +58,6 @@ TransactionsCtrl.getTransaction = async (req, res) => {
             let compras = 0;
             let ventas = 0;
             let totalComprado = 0
-            let cantidadActual=0;
             monedasDeUsuario.push(transactionItem.nombreMoneda)
             transactions.forEach(transactionToken => {
                 // Buscamos todas las transacciones con el nombre de la moneda en especifico
