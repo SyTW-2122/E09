@@ -56,6 +56,7 @@ TransactionsCtrl.getTransaction = async (req, res) => {
             let compras = 0;
             let ventas = 0;
             let totalComprado = 0
+            let cantidadActual=0;
             monedasDeUsuario.push(transactionItem.nombreMoneda)
             transactions.forEach(transactionToken => {
                 // Buscamos todas las transacciones con el nombre de la moneda en especifico
@@ -74,6 +75,7 @@ TransactionsCtrl.getTransaction = async (req, res) => {
             index = monedasBD.findIndex(element => element.nombre == transactionItem.nombreMoneda)
             const precio_actual = monedasBD[index].precio
             let rendimiento = compras + ventas + precio_actual * cantidad
+            cantidadActual += precio_actual * cantidad
             let objeto = {
                 "nombre": transactionItem.nombreMoneda,
                 "symbol": monedasBD[index].symbol,
@@ -86,16 +88,14 @@ TransactionsCtrl.getTransaction = async (req, res) => {
                 "beneficios": rendimiento,
                 "porcentajeRendimiento": -(rendimiento / compras * 100)   //(((ventas + precio_actual * cantidad) / -compras)*100)- 100
             }
-            //console.log(objeto)
-            if (cantidad > 0) {
-                transactionsResult.push(objeto)
-            }
+            transactionsResult.push(objeto)
         }
     })
     /**Rendimiento de cada moneda */
     let respuesta = {
         "comprasGenerales": comprasGenerales,
         "ventasGenerales": ventasGenerales,
+        "cantidadActual":cantidadActual,
         "transactionsResult": transactionsResult
     }
     res.json(respuesta)
