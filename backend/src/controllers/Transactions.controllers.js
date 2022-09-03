@@ -41,10 +41,15 @@ TransactionsCtrl.getTransaction = async (req, res) => {
     const transactions = await Transaction.find({ "nombreUsuario": nombreUsuario })
     const monedasBD = await Moneda.find({})
     let monedasDeUsuario = [];
-    let comprasGenerales = 0;
-    let ventasGenerales = 0;
+    let comprasGenerales = 0; // Dinero total invertido del usuario
+    let ventasGenerales = 0; // Total de ventas del usuario
     let transactionsResult = []
-    let cantidadActual=0;
+    let cantidadActual=0; // Cantidad de dinero actual que posee el usuario. sum(cantidad * precioActual)
+    let beneficio=0; // Beneficios/Perdidas totales de tus monedas
+    let mejorMoneda = "";
+    let mejorValor = -Infinity
+    let peorMoneda = "";
+    let peorValor = Infinity
 
     transactions.forEach(async transactionItem => {
         if (transactionItem.tipo == "compra") { // Suma cantidades que has comprado
@@ -57,7 +62,7 @@ TransactionsCtrl.getTransaction = async (req, res) => {
             let cantidad = 0;
             let compras = 0;
             let ventas = 0;
-            let totalComprado = 0
+            let totalComprado = 0;
             monedasDeUsuario.push(transactionItem.nombreMoneda)
             transactions.forEach(transactionToken => {
                 // Buscamos todas las transacciones con el nombre de la moneda en especifico
@@ -77,6 +82,17 @@ TransactionsCtrl.getTransaction = async (req, res) => {
             const precio_actual = monedasBD[index].precio
             let rendimiento = compras + ventas + precio_actual * cantidad
             cantidadActual += precio_actual * cantidad
+            beneficio += rendimiento;
+            porcentajeRendimiento = -(rendimiento/compras * 100)
+            if (rendimiento > mejorValor) {
+                mejorValor = rendimiento
+                mejorMoneda = transactionItem.nombreMoneda
+            }
+            if (rendimiento < peorValor) {
+                peorValor = rendimiento
+                peorMoneda = transactionItem.nombreMoneda
+            }            
+
             let objeto = {
                 "nombre": transactionItem.nombreMoneda,
                 "symbol": monedasBD[index].symbol,
@@ -87,7 +103,7 @@ TransactionsCtrl.getTransaction = async (req, res) => {
                 "p24h": monedasBD[index].p24h,
                 "p7d": monedasBD[index].p7d,
                 "beneficios": rendimiento,
-                "porcentajeRendimiento": -(rendimiento / compras * 100)   //(((ventas + precio_actual * cantidad) / -compras)*100)- 100
+                "porcentajeRendimiento": porcentajeRendimiento   //(((ventas + precio_actual * cantidad) / -compras)*100)- 100
             }
             transactionsResult.push(objeto)
         }
@@ -97,7 +113,10 @@ TransactionsCtrl.getTransaction = async (req, res) => {
         "comprasGenerales": comprasGenerales,
         "ventasGenerales": ventasGenerales,
         "cantidadActual":cantidadActual,
-        "transactionsResult": transactionsResult
+        "beneficio":beneficio,
+        "transactionsResult": transactionsResult,
+        "mejorMoneda": [mejorMoneda,mejorValor],
+        "peorMoneda": [peorMoneda,peorValor]
     }
     res.json(respuesta)
 }
