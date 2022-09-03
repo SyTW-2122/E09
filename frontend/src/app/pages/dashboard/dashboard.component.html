@@ -67,7 +67,8 @@
           <mat-card class="example-card" >
             <mat-card-title style="text-align: center;">Cantidad actual ($)</mat-card-title>
             <mat-card-content>
-              <p style="text-align: center;">${{format(cantidadActual)}}</p>
+              <span  *ngIf="beneficio >= 0" class="positive bold"><p style="text-align: center; font-size: 20px;"><b>${{format(cantidadActual)}}</b></p></span>
+              <span  *ngIf="beneficio < 0" class="negative bold"><p style="text-align: center; font-size: 20px;"><b>${{format(cantidadActual)}}</b></p></span>
             </mat-card-content>
           </mat-card>
         </div>
@@ -75,7 +76,7 @@
           <mat-card class="example-card">
             <mat-card-title style="text-align: center;">Total invertido ($)</mat-card-title>
             <mat-card-content>
-              <p style="text-align: center;">${{format(comprasGenerales)}}</p>
+              <p style="text-align: center; font-size: 20px;"><b>${{format(comprasGenerales)}}</b></p>
             </mat-card-content>
           </mat-card>
         </div>
@@ -83,7 +84,8 @@
           <mat-card class="example-card">
             <mat-card-title style="text-align: center;">Beneficio/Pérdida ($)</mat-card-title>
             <mat-card-content>
-              <p style="text-align: center;">${{format(beneficio)}}</p>
+              <span  *ngIf="beneficio >= 0" class="positive bold"><p style="text-align: center; font-size: 20px;"><b>${{format(beneficio)}}</b></p></span>
+              <span  *ngIf="beneficio < 0" class="negative bold"><p style="text-align: center; font-size: 20px;"><b>${{format(beneficio)}}</b></p></span>
             </mat-card-content>
           </mat-card>
         </div>
@@ -92,7 +94,7 @@
             <mat-card-title style="text-align: center;">Mejor moneda</mat-card-title>
             <mat-card-subtitle style="text-align: center;">Moneda de la cuál se han obtenido más beneficios o menos pérdidas</mat-card-subtitle>
             <mat-card-content>
-              <p style="text-align: center;">{{mejorMoneda[0]}} ${{format(mejorMoneda[1])}}</p>
+              <span class="positive bold"><p style="text-align: center; font-size: 20px;"><b>{{mejorMoneda[0]}} ${{format(mejorMoneda[1])}}</b></p></span>
             </mat-card-content>
           </mat-card>
         </div>
@@ -101,7 +103,7 @@
             <mat-card-title style="text-align: center;">Peor moneda</mat-card-title>
             <mat-card-subtitle style="text-align: center;">Moneda de la cuál se han obtenido más pérdidas o menos beneficios</mat-card-subtitle>
             <mat-card-content>
-              <p style="text-align: center;">{{peorMoneda[0]}} ${{format(peorMoneda[1])}}</p>
+            <span class="negative bold"><p style="text-align: center; font-size: 20px;"><b>{{peorMoneda[0]}} ${{format(peorMoneda[1])}}</b></p></span>
             </mat-card-content>
           </mat-card>
         </div>
@@ -172,9 +174,14 @@
     </div>
 
     <!-- TABLA HISTORIAL -->
+    <div style="padding-top: 5%;">
+      <span>
+        <h2 style="text-align: center;">Historial de transacciones</h2>
+      </span>
+    </div>
     <div class="row" id="historial">
       <div class="mat-elevation-z8">
-        <table mat-table [dataSource]="dataSource" matSort>
+        <table mat-table [dataSource]="dataSource2" style="width: 100%;" matSort>
           <ng-container matColumnDef="nombre">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </th>
             <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
@@ -183,10 +190,7 @@
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Símbolo </th>
             <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
           </ng-container>
-          <ng-container matColumnDef="inversion">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Inversión </th>
-            <td mat-cell *matCellDef="let element"> ${{format(element.inversion.toFixed(3))}} </td>
-          </ng-container>
+          
           <ng-container matColumnDef="cantidad">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Cantidad </th>
             <td mat-cell *matCellDef="let element"> {{element.cantidad}}</td>
@@ -220,17 +224,12 @@
               <span *ngIf="element.porcentajeRendimiento < 0" class="negative bold">{{element.porcentajeRendimiento.toFixed(3) }}%</span>
             </td>
           </ng-container>      
-          <ng-container matColumnDef="acciones">
-            <th mat-header-cell *matHeaderCellDef> </th>
-            <td mat-cell *matCellDef="let element" style="text-align: right;" > 
-              <a (click)="eliminar(element)" class="pointer" style="color: primary" matTooltip="Eliminar moneda" matTooltipPosition="right">
-                <mat-icon>delete</mat-icon>
-              </a> 
-            </td>
-          </ng-container>   
-          
-          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          <ng-container matColumnDef="fecha">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha </th>
+            <td mat-cell *matCellDef="let element"> {{element.fecha}} </td>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns2"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns2;"></tr>
         </table>  
         <mat-paginator [pageSize]="10" aria-label="Select page of users"></mat-paginator>
       </div>
