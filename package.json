@@ -3,8 +3,8 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "cd frontend && npm install && ng serve",
-    "build": "ng build",
+    "start": "cd frontend && ng serve",
+    "build": "cd frontend && ng serve",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
