@@ -1,7 +1,5 @@
 <body>
-  <nav
-    style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);"
-    aria-label="breadcrumb">
+  <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a [routerLink]="['/home']">Home</a></li>
       <li class="breadcrumb-item" aria-current="page">Dashboard</li>
@@ -120,59 +118,58 @@
         <div class="mat-elevation-z8">
           <table mat-table [dataSource]="dataSource" matSort>
             <ng-container matColumnDef="nombre">
-              <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </th>
+              <th mat-header-cell *matHeaderCellDef mat-sort-header id="columnas"> Nombre </th>
               <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
             </ng-container>
             <ng-container matColumnDef="symbol">
-              <th mat-header-cell *matHeaderCellDef mat-sort-header> Símbolo </th>
+              <th mat-header-cell *matHeaderCellDef mat-sort-header id="columnas"> Símbolo </th>
               <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
             </ng-container>
             <ng-container matColumnDef="inversion">
-              <th mat-header-cell *matHeaderCellDef mat-sort-header> Inversión </th>
+              <th mat-header-cell *matHeaderCellDef mat-sort-header id="columnas"> Inversión </th>
               <td mat-cell *matCellDef="let element"> ${{format(element.inversion.toFixed(3))}} </td>
             </ng-container>
             <ng-container matColumnDef="cantidad">
-              <th mat-header-cell *matHeaderCellDef mat-sort-header> Cantidad </th>
+              <th mat-header-cell *matHeaderCellDef mat-sort-header id="columnas"> Cantidad </th>
               <td mat-cell *matCellDef="let element"> {{element.cantidad}}</td>
             </ng-container>
             <ng-container matColumnDef="preciocompra">
-              <th mat-header-cell *matHeaderCellDef mat-sort-header> Precio compra </th>
+              <th mat-header-cell *matHeaderCellDef mat-sort-header id="columnas"> Precio compra </th>
               <td mat-cell *matCellDef="let element"> ${{format(element.preciocompra.toFixed(3))}} </td>
             </ng-container>
             <ng-container matColumnDef="precioactual">
-              <th mat-header-cell *matHeaderCellDef mat-sort-header> Precio actual</th>
+              <th mat-header-cell *matHeaderCellDef mat-sort-header id="columnas"> Precio actual</th>
               <td mat-cell *matCellDef="let element"> ${{format(element.precioactual.toFixed(3))}} </td>
             </ng-container>
             <ng-container matColumnDef="p24h">
-              <th mat-header-cell *matHeaderCellDef mat-sort-header> p24h% </th>
+              <th mat-header-cell *matHeaderCellDef mat-sort-header id="columnas"> p24h% </th>
               <td mat-cell *matCellDef="let element">
                 <span *ngIf="element.p24h >= 0" class="positive bold">{{element.p24h.toFixed(3) }}%</span>
                 <span *ngIf="element.p24h < 0" class="negative bold">{{element.p24h.toFixed(3) }}%</span>
               </td>
             </ng-container>
             <ng-container matColumnDef="beneficios">
-              <th mat-header-cell *matHeaderCellDef mat-sort-header> Beneficios </th>
+              <th mat-header-cell *matHeaderCellDef mat-sort-header id="columnas"> Beneficios </th>
               <td mat-cell *matCellDef="let element"> 
                 <span *ngIf="element.beneficios >= 0" class="positive bold">${{element.beneficios.toFixed(3) }}</span>
                 <span *ngIf="element.beneficios < 0" class="negative bold">${{element.beneficios.toFixed(3) }}</span>
               </td>
             </ng-container>
             <ng-container matColumnDef="porcentajeRendimiento">
-              <th mat-header-cell *matHeaderCellDef mat-sort-header> Desempeño </th>
+              <th mat-header-cell *matHeaderCellDef mat-sort-header id="columnas"> Desempeño </th>
               <td mat-cell *matCellDef="let element"> 
                 <span *ngIf="element.porcentajeRendimiento >= 0" class="positive bold">{{element.porcentajeRendimiento.toFixed(3) }}%</span>
                 <span *ngIf="element.porcentajeRendimiento < 0" class="negative bold">{{element.porcentajeRendimiento.toFixed(3) }}%</span>
               </td>
             </ng-container>      
             <ng-container matColumnDef="acciones">
-              <th mat-header-cell *matHeaderCellDef> </th>
+              <th mat-header-cell *matHeaderCellDef id="columnas"> </th>
               <td mat-cell *matCellDef="let element" style="text-align: right;" > 
                 <a (click)="eliminar(element)" class="pointer" style="color: primary" matTooltip="Eliminar moneda" matTooltipPosition="right">
                   <mat-icon>delete</mat-icon>
                 </a> 
               </td>
             </ng-container>   
-            
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
           </table>  
@@ -244,31 +241,31 @@
       <div class="mat-elevation-z8">
         <table mat-table [dataSource]="dataSource2" style="width: 100%;" matSort>
           <ng-container matColumnDef="nombreMoneda">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </th>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header id="columnas2"> Nombre </th>
             <td mat-cell *matCellDef="let element"> {{element.nombreMoneda}} </td>
           </ng-container>
           <ng-container matColumnDef="symbol">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Símbolo </th>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header id="columnas2"> Símbolo </th>
             <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
           </ng-container>  
           <ng-container matColumnDef="cantidad">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Cantidad </th>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header id="columnas2"> Cantidad </th>
             <td mat-cell *matCellDef="let element"> {{element.cantidad}}</td>
           </ng-container>
           <ng-container matColumnDef="precio">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Precio </th>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header id="columnas2"> Precio </th>
             <td mat-cell *matCellDef="let element"> ${{format(element.precio.toFixed(3))}} </td>
           </ng-container>
           <ng-container matColumnDef="tipo">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Tipo</th>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header id="columnas2"> Tipo</th>
             <td mat-cell *matCellDef="let element"> {{element.tipo}} </td>
           </ng-container>     
           <ng-container matColumnDef="fecha">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha </th>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header id="columnas2"> Fecha </th>
             <td mat-cell *matCellDef="let element"> {{element.fecha.slice(0,10)}} </td>
           </ng-container>
           <ng-container matColumnDef="acciones">
-            <th mat-header-cell *matHeaderCellDef> </th>
+            <th mat-header-cell *matHeaderCellDef id="columnas2"> </th>
             <td mat-cell *matCellDef="let element" style="text-align: right;" > 
               <a (click)="guardarId(element)" class="pointer" style="color: primary" matTooltip="Editar transaccion" matTooltipPosition="right">
                 <mat-icon data-bs-toggle="modal" data-bs-target="#editModal">edit</mat-icon>
@@ -281,7 +278,5 @@
         <mat-paginator [pageSize]="10" aria-label="Select page of users"></mat-paginator>
       </div>
     </div>
-
-
   </div>
 </body>

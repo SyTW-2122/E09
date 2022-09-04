@@ -5,17 +5,11 @@
 }
 
 .container {
-  position: absolute;
   padding-top: 10%;
-  width: 100%;
-}
+  }
 
 #historial {
  padding-top: 5%; 
-}
-
-.row {
-  //border: 1px solid #000;
 }
 
 .pointer {
@@ -40,12 +34,13 @@
   min-height: 10vh;
 }
 
-.table {
-  width: 100%;
+#columnas {
+  width: 11%;
+  padding: auto;
 }
 
-th {
-  width: 11%;
+#columnas2 {
+  width: 17%;
   padding: auto;
 }
 

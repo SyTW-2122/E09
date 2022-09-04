@@ -1,22 +1,8 @@
-<head>
-  <style>
-    .mat-chip-list-wrapper {
-      display: contents;
-      flex-direction: row;
-      flex-wrap: wrap;
-      align-items: center;
-      margin: -4px;
-    }
-  </style>
-</head>
-
 <body>
-  <nav
-    style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);"
-    aria-label="breadcrumb">
+  <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a [routerLink]="['/home']">Home</a></li>
-      <li class="breadcrumb-item active" aria-current="page">Monedas</li>
+      <li class="breadcrumb-item" aria-current="page">{{datosM.nombre}}</li>
     </ol>
   </nav>
   <div class="container" >
@@ -26,13 +12,15 @@
           <img src="/assets/{{datosM.nombre}}.png" class="col-2 logo"  /> 
           <p class="col-8"style="font-size: 32px"><b>{{datosM.nombre}}</b><span class="badge bg-primary me-2 m-2" id="symbol-badge" style="width: 12%;">{{datosM.symbol}}</span></p>
         </div>
-        <div class="row-12">
+        <div class="row-8">
           <!-- <mat-chip-list class="example-chip" cdkDropListOrientation="horizontal"*ngFor="let tag of datosM.tags; index as i">
             <mat-chip *ngIf="i < 12">{{tag}}</mat-chip>
           </mat-chip-list>         -->
-          <mat-chip-list class="example-chip" cdkDropListOrientation="horizontal" style=display:contents; *ngFor="let tag of datosM.tags; index as i">
-            <mat-chip >{{tag}}</mat-chip>
-          </mat-chip-list>
+          <div>
+            <div class="badge bg-primary col-2 me-2 mt-2" *ngFor="let tag of datosM.tags; index as i" style="width: 20%">
+              <span *ngIf="i < 12">{{tag}}</span>
+            </div>   
+          </div>
         </div>
       </div>
       <div class="col">
@@ -75,6 +63,7 @@
         </div>
         <div class="row" id="espacio"></div>
       </div>
+      
       <div class="col" id="col-datos3">
         <div class="row" id="espacio-top"></div>
         <div class="row" id="row-datos3">
@@ -94,7 +83,6 @@
     </div>
     <div class="row">
       <div class="col" id="col-datos1">
-        <div class="row" id="espacio-top"></div>
         <div class="row" id="row-datos1">
           <p style="color:#D61C4E;">
             <b>Dominancia de mercado</b>
@@ -110,7 +98,6 @@
         <div class="row" id="espacio"></div>
       </div>
       <div class="col" id="col-datos2">
-        <div class="row" id="espacio-top"></div>
         <div class="row" id="row-datos2">
           <p style="color:#D61C4E;">
             <b>Max Supply</b>
@@ -127,7 +114,6 @@
         <div class="row" id="espacio"></div>
       </div>
       <div class="col" id="col-datos3">
-        <div class="row" id="espacio-top"></div>
         <div class="row" id="row-datos3">
           <p style="color:#D61C4E;">
             <b>Volumen change (24h)</b>
@@ -192,7 +178,6 @@
     </div>
     <div class="row" id="variacion">
       <div class="col" id="col-datos1">
-        <div class="row" id="espacio-top"></div>
         <div class="row" id="row-datos1">
           <p style="color:#D61C4E;">
             <b>Cambio (30d)</b>
@@ -205,7 +190,6 @@
         <div class="row" id="espacio"></div>
       </div>
       <div class="col" id="col-datos2">
-        <div class="row" id="espacio-top"></div>
         <div class="row" id="row-datos2">
           <p style="color:#D61C4E;">
             <b>Cambio (60d)</b>
@@ -218,7 +202,6 @@
         <div class="row" id="espacio"></div>
       </div>
       <div class="col" id="col-datos3">
-        <div class="row" id="espacio-top"></div>
         <div class="row" id="row-datos3">
           <p style="color:#D61C4E;">
             <b>Cambio 90d</b>
