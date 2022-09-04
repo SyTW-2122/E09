@@ -1,4 +1,4 @@
-<body>
+<div class="container">
   <mat-spinner *ngIf="loading" class="spinner" diameter="50"></mat-spinner>
   <div id="formulario">
     <form *ngIf="!loading" [formGroup]="form" (ngSubmit)="ingresar()">
@@ -44,4 +44,4 @@
       </div>
     </form>
   </div>
-</body>
+</div>

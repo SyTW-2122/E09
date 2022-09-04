@@ -1,16 +1,17 @@
 /* You can add global styles to this file, and also import other style files*/
+html, body {height: 100%;}
 
 body { 
   margin: 0; 
   font-family: Roboto, "Helvetica Neue", sans-serif;
   min-height: 100vh;
   display: grid;
-  grid-template-rows: auto 1fr auto;
+  width: 100%;
 }
 
 footer {
   width: 100%;
-  background-color: coral;
+  background-color: #293462;
   padding: 1em 0;
   margin-top: 10%;
 }
