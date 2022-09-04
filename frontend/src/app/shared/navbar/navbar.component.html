@@ -14,8 +14,8 @@
         </li>
       </ul> 
       <span class="example-spacer"></span>
-      <button *ngIf='isLogged()' type="button" style="background-color: #D61C4E;" class="btn btn-rounded" [routerLink]="['/sign-in']"><b style="color:white ;">Inicia sesión</b></button>
-      <button *ngIf='!isLogged()' (click)="logout()" type="button" style="background-color: #424242;" class="btn btn-rounded"><b style="color:white ;">Cerrar Sesión</b></button>
+      <button *ngIf='isLogged()' type="button" style="background-color: #D61C4E; color:white" class="btn btn-rounded" [routerLink]="['/sign-in']">Inicia sesión</button>
+      <button *ngIf='!isLogged()' (click)="logout()" type="button" style="background-color: #424242; color:white" class="btn btn-rounded">Cerrar Sesión</button>
     </div>
   </div>
 </nav>
