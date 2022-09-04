@@ -2,21 +2,21 @@
   <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a [routerLink]="['/home']">Home</a></li>
-      <li class="breadcrumb-item" aria-current="page">{{datosM.nombre}}</li>
+      <li *ngIf="isLoaded" class="breadcrumb-item" aria-current="page">{{datosM.nombre}}</li>
     </ol>
   </nav>
   <div class="container" >
     <div class="row">
       <div class="col-8">
         <div class="row" >
-          <img src="/assets/{{datosM.nombre}}.png" class="col-2 logo"  /> 
-          <p class="col-8"style="font-size: 32px"><b>{{datosM.nombre}}</b><span class="badge bg-primary me-2 m-2" id="symbol-badge" style="width: 12%;">{{datosM.symbol}}</span></p>
+          <img *ngIf="isLoaded" src="/assets/{{datosM.nombre}}.png" class="col-2 logo"  /> 
+          <p *ngIf="isLoaded" class="col-8"style="font-size: 32px"><b>{{datosM.nombre}}</b><span class="badge bg-primary me-2 m-2" id="symbol-badge" style="width: 12%;">{{datosM.symbol}}</span></p>
         </div>
         <div class="row-8">
           <!-- <mat-chip-list class="example-chip" cdkDropListOrientation="horizontal"*ngFor="let tag of datosM.tags; index as i">
             <mat-chip *ngIf="i < 12">{{tag}}</mat-chip>
           </mat-chip-list>         -->
-          <div>
+          <div *ngIf="isLoaded" > 
             <div class="badge bg-primary col-2 me-2 mt-2" *ngFor="let tag of datosM.tags; index as i" style="width: 20%">
               <span *ngIf="i < 12">{{tag}}</span>
             </div>   
@@ -25,8 +25,8 @@
       </div>
       <div class="col">
         <div class="row">
-          <p *ngIf="datosM.p1h < 0" style="font-size: 32px"><b>${{datosM.precio.toFixed(5)}}  </b><span class="badge bg-danger">{{datosM.p1h.toFixed(3)}}%</span></p>
-          <p *ngIf="datosM.p1h>= 0" style="font-size: 32px"><b>${{datosM.precio.toFixed(5)}}  </b><span class="badge bg-success">{{datosM.p1h.toFixed(3)}}%</span></p>
+          <p *ngIf="datosM.p1h < 0 && isLoaded" style="font-size: 32px"><b>${{datosM.precio.toFixed(5)}}  </b><span class="badge bg-danger">{{datosM.p1h.toFixed(3)}}%</span></p>
+          <p *ngIf="datosM.p1h>= 0 && isLoaded" style="font-size: 32px"><b>${{datosM.precio.toFixed(5)}}  </b><span class="badge bg-success">{{datosM.p1h.toFixed(3)}}%</span></p>
         </div>
       </div>
     </div>
@@ -42,7 +42,7 @@
             </a>
           </p>
           <p>
-            <b>${{format(datosM.marketcap.toFixed())}} </b>
+            <b *ngIf="isLoaded" >${{format(datosM.marketcap.toFixed())}} </b>
           </p>
         </div>
         <div class="row" id="espacio"></div>
@@ -58,7 +58,7 @@
             </a>
           </p>
           <p>
-            <b>${{format(datosM.volumen24h.toFixed())}}</b>
+            <b *ngIf="isLoaded" >${{format(datosM.volumen24h.toFixed())}}</b>
           </p>
         </div>
         <div class="row" id="espacio"></div>
@@ -75,7 +75,7 @@
             </a>
           </p>
           <p>
-            <b>{{format(datosM.circulatingSupply.toFixed())}} {{datosM.symbol}}</b>
+            <b *ngIf="isLoaded" >{{format(datosM.circulatingSupply.toFixed())}} {{datosM.symbol}}</b>
           </p>
         </div>
         <div class="row" id="espacio"></div>
@@ -92,7 +92,7 @@
             </a>
           </p>
           <p>
-            <b>{{datosM.marketdom.toFixed(3)}}%</b>
+            <b *ngIf="isLoaded" >{{datosM.marketdom.toFixed(3)}}%</b>
           </p>
         </div>
         <div class="row" id="espacio"></div>
@@ -107,8 +107,8 @@
             </a>
           </p>
           <p>
-            <b *ngIf="datosM.maxsupply != null">{{format(datosM.maxsupply.toFixed())}} {{datosM.symbol}}</b>
-            <b *ngIf="datosM.maxsupply == null">Ilimitado</b>
+            <b *ngIf="datosM.maxsupply != null && isLoaded">{{format(datosM.maxsupply.toFixed())}} {{datosM.symbol}}</b>
+            <b *ngIf="datosM.maxsupply == null && isLoaded">Ilimitado</b>
           </p>
         </div>
         <div class="row" id="espacio"></div>
@@ -123,7 +123,7 @@
             </a>
           </p>
           <p>
-            <b>{{datosM.volumenchange24h.toFixed(3)}}%</b>
+            <b *ngIf="isLoaded" >{{datosM.volumenchange24h.toFixed(3)}}%</b>
           </p>
         </div>
         <div class="row" id="espacio"></div>
@@ -143,8 +143,8 @@
             <b>Cambio (1h)</b>
           </p>
           <p id="prueba">
-            <b *ngIf="datosM.p1h< 0" class="negative">{{datosM.p1h.toFixed(3)}}%</b>
-            <b *ngIf="datosM.p1h>= 0" class="positive">{{datosM.p1h.toFixed(3)}}%</b>
+            <b *ngIf="datosM.p1h< 0 && isLoaded" class="negative">{{datosM.p1h.toFixed(3)}}%</b>
+            <b *ngIf="datosM.p1h>= 0 && isLoaded" class="positive">{{datosM.p1h.toFixed(3)}}%</b>
           </p>
         </div>
         <div class="row" id="espacio"></div>
@@ -156,8 +156,8 @@
             <b>Cambio (24h)</b>
           </p>
           <p>
-            <b *ngIf="datosM.p24h< 0" class="negative">{{datosM.p24h.toFixed(3)}}%</b>
-            <b *ngIf="datosM.p24h>= 0" class="positive">{{datosM.p24h.toFixed(3)}}%</b>
+            <b *ngIf="datosM.p24h< 0 && isLoaded" class="negative">{{datosM.p24h.toFixed(3)}}%</b>
+            <b *ngIf="datosM.p24h>= 0 && isLoaded" class="positive">{{datosM.p24h.toFixed(3)}}%</b>
           </p>
         </div>
         <div class="row" id="espacio"></div>
@@ -169,8 +169,8 @@
             <b>Cambio (7d)</b>
           </p>
           <p>
-            <b *ngIf="datosM.p7d< 0" class="negative">{{datosM.p7d.toFixed(3)}}%</b>
-            <b *ngIf="datosM.p7d>= 0" class="positive">{{datosM.p7d.toFixed(3)}}%</b>
+            <b *ngIf="datosM.p7d< 0 && isLoaded" class="negative">{{datosM.p7d.toFixed(3)}}%</b>
+            <b *ngIf="datosM.p7d>= 0 && isLoaded" class="positive">{{datosM.p7d.toFixed(3)}}%</b>
           </p>
         </div>
         <div class="row" id="espacio"></div>
@@ -183,8 +183,8 @@
             <b>Cambio (30d)</b>
           </p>
           <p>
-            <b *ngIf="datosM.p30d< 0" class="negative">{{datosM.p30d.toFixed(3)}}%</b>
-            <b *ngIf="datosM.p30d>= 0" class="positive">{{datosM.p30d.toFixed(3)}}%</b>
+            <b *ngIf="datosM.p30d< 0 && isLoaded" class="negative">{{datosM.p30d.toFixed(3)}}%</b>
+            <b *ngIf="datosM.p30d>= 0 && isLoaded" class="positive">{{datosM.p30d.toFixed(3)}}%</b>
           </p>
         </div>
         <div class="row" id="espacio"></div>
@@ -195,8 +195,8 @@
             <b>Cambio (60d)</b>
           </p>
           <p>
-            <b *ngIf="datosM.p60d< 0" class="negative">{{datosM.p60d.toFixed(3)}}%</b>
-            <b *ngIf="datosM.p60d>= 0" class="positive">{{datosM.p60d.toFixed(3)}}%</b>
+            <b *ngIf="datosM.p60d< 0 && isLoaded" class="negative">{{datosM.p60d.toFixed(3)}}%</b>
+            <b *ngIf="datosM.p60d>= 0 && isLoaded" class="positive">{{datosM.p60d.toFixed(3)}}%</b>
           </p>
         </div>
         <div class="row" id="espacio"></div>
@@ -207,8 +207,8 @@
             <b>Cambio 90d</b>
           </p>
           <p>
-            <b *ngIf="datosM.p90d< 0" class="negative">{{datosM.p90d.toFixed(3)}}%</b>
-            <b *ngIf="datosM.p90d>= 0" class="positive">{{datosM.p90d.toFixed(3)}}%</b>
+            <b *ngIf="datosM.p90d< 0 && isLoaded" class="negative">{{datosM.p90d.toFixed(3)}}%</b>
+            <b *ngIf="datosM.p90d>= 0 && isLoaded" class="positive">{{datosM.p90d.toFixed(3)}}%</b>
           </p>
         </div>
         <div class="row" id="espacio"></div>

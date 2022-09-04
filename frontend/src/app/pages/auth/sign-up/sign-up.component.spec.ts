@@ -1,4 +1,8 @@
+import { HttpClientModule } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { RouterTestingModule } from '@angular/router/testing';
 
 import { SignUpComponent } from './sign-up.component';
 
@@ -8,7 +12,8 @@ describe('SignUpComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SignUpComponent ]
+      declarations: [ SignUpComponent ],
+      imports: [ReactiveFormsModule, MatSnackBarModule, HttpClientModule, RouterTestingModule.withRoutes([])]
     })
     .compileComponents();
   });

@@ -9,7 +9,8 @@ import { Router } from '@angular/router';
 })
 
 export class MonedasComponent implements OnInit {
-  datosM!:any
+  datosM:any = []
+  isLoaded: boolean = false
   constructor(private monedaService : MonedasService, private router: Router) { }
 
   ngOnInit(): void {
@@ -24,6 +25,7 @@ export class MonedasComponent implements OnInit {
     this.monedaService.getMoneda(moneda).subscribe({
       next: (res) => {
         this.datosM = res
+        this.isLoaded = true
       },
       error: (e:any) => {
         console.log(e);

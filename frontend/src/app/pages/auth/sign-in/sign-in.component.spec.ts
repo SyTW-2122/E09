@@ -1,4 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { HttpClientModule } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { RouterTestingModule } from '@angular/router/testing';
 
 import { SignInComponent } from './sign-in.component';
 
@@ -8,7 +12,9 @@ describe('SignInComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SignInComponent ]
+      declarations: [ SignInComponent ],
+      imports: [ReactiveFormsModule, MatSnackBarModule, HttpClientModule, RouterTestingModule.withRoutes([])]
+
     })
     .compileComponents();
   });
@@ -21,5 +27,12 @@ describe('SignInComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+  it('login test', () => {
+    let email = component.form.controls['email']
+    email.setValue("andres")
+    let password = component.form.controls['password']
+    password.setValue("andres")
+    expect(component.form.invalid).toBeFalse();
   });
 });
