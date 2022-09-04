@@ -1,10 +1,10 @@
 {
   "name": "frontend",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "scripts": {
     "ng": "ng",
     "start": "cd frontend && ng serve",
-    "build": "cd frontend && ng build",
+    "build": "cd frontend && npm install && ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
