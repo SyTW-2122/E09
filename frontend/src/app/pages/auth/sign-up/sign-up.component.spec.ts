@@ -27,4 +27,16 @@ describe('SignUpComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('Se puede registrar un usuario', () => {
+    let nombre = component.form.controls['username']
+    nombre.setValue("Paco")
+    let email = component.form.controls['email']
+    email.setValue("Paco@gmail.com")
+    let password = component.form.controls['password']
+    password.setValue("PacoSecretPassword")
+    let password2 = component.form.controls['password2']
+    password2.setValue("PacoSecretPassword")
+    expect(component.form.invalid).toBeFalse();
+  });
 });

@@ -28,11 +28,16 @@ describe('SignInComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-  it('login test', () => {
+  it('Se puede logear exitosamente', () => {
     let email = component.form.controls['email']
     email.setValue("andres")
     let password = component.form.controls['password']
     password.setValue("andres")
     expect(component.form.invalid).toBeFalse();
+  });
+  it('El logeo no es exitoso si no se especifica una contraseña', () => {
+    let email = component.form.controls['email']
+    email.setValue("andres")
+    expect(component.form.invalid).toBeTrue();
   });
 });
