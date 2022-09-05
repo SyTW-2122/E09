@@ -2,6 +2,7 @@
 
 ## Sistemas y Tecnologías Web
 
+[![Coveralls](https://github.com/SyTW-2122/E09/actions/workflows/coveralls.yml/badge.svg)](https://github.com/SyTW-2122/E09/actions/workflows/coveralls.yml)
 [![Coverage Status](https://coveralls.io/repos/github/SyTW-2122/E09/badge.svg)](https://coveralls.io/github/SyTW-2122/E09)
 
 Para este proyecto hemos creado un Portfolio de criptomonedas. Con la aplicación el usuario podrá tener todos sus activos controlados dentro de la app.
