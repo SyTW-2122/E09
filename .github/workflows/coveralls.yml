@@ -12,6 +12,7 @@ on:
 
 jobs:
   coveralls:
+    name: coverage code
     runs-on: ubuntu-latest
 
     steps:
