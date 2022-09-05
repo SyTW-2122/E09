@@ -11,7 +11,7 @@ Cada vez que un usuario adquiera algún tipo de criptomoneda, podrá introducir 
 Para realizar el proyecto elegimos el stack MEAN (Mongo, Express, Angular y Node)
 
 
-Grupo E09
+### Grupo E09
 - Aitor Alonse Melián (alu0101122496@ull.edu.es)
 - Nelson Noda Pérez (alu0101130675@ull.edu.es)
 - Juan Eduardo Reyes Pérez (alu0101120584@ull.edu.es)
