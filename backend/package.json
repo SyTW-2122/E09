@@ -8,7 +8,7 @@
     "test:watch": "npm run test -- --watch",
     "dev": "nodemon src/index.js",
     "start": "node src/index.js",
-    "coverage": "jest --all --coverage && coveralls < coverage/lcov.info"
+    "coverage": "jest --browsers=ChromeHeadless --all --coverage && coveralls < coverage/lcov.info"
   },
   "keywords": [],
   "author": "",
