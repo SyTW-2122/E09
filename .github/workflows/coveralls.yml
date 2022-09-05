@@ -1,0 +1,42 @@
+
+# This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
+
+name: Coveralls
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  coveralls:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Cloning repo
+      uses: actions/checkout@v2
+
+    - name: Use Node.js 18.x
+      uses: actions/setup-node@v1
+      with:
+        node-version: 18.x
+
+    - name: Installing dependencies
+      run: cd ./frontend && npm install
+    
+    - name: Generating coverage information
+      run: cd ./frontend && npm run coverage
+
+    - name: Installing dependencies
+      run: cd ./backend && npm install
+
+    - name: Generating coverage information
+      run: cd ./backend && npm run coverage
+
+    - name: Coveralls GitHub Action
+      uses: coverallsapp/github-action@master
+
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
